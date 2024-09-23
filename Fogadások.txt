@@ -1,0 +1,77 @@
+
+
+
+CREATE TABLE Bets (
+  BetsID INT AUTO_INCREMENT PRIMARY KEY,   
+  BetDate DATE NOT NULL,                   
+  Odds FLOAT NOT NULL,                     
+  Amount INT NOT NULL,                     
+  BettorsID INT NOT NULL,                  
+  EventID INT NOT NULL,                    
+  Status BOOLEAN NOT NULL,             
+  FOREIGN KEY (BettorsID) REFERENCES Bettors(BettorsID),
+  FOREIGN KEY (EventID) REFERENCES Events(EventID)
+);
+
+CREATE TABLE Bettors (
+  BettorsID INT AUTO_INCREMENT PRIMARY KEY,  
+  Username VARCHAR(50) NOT NULL,
+  Password VARCHAR(255),              
+  Balance INT NOT NULL,                      
+  Email VARCHAR(100) NOT NULL,               
+  JoinDate DATE NOT NULL,                     
+  IsActive BOOLEAN NOT NULL DEFAULT 1        
+);
+
+CREATE TABLE Events (
+  EventID INT AUTO_INCREMENT PRIMARY KEY,     
+  EventName VARCHAR(100) NOT NULL,            
+  EventDate DATE NOT NULL,                    
+  Category VARCHAR(50) NOT NULL,             
+  Location VARCHAR(100) NOT NULL             
+);
+
+-- Insert into Events table
+INSERT INTO Events (EventName, EventDate, Category, Location) VALUES
+('Champions League Final', '2024-05-25', 'Football', 'Wembley Stadium, London'),
+('NBA Finals Game 7', '2024-06-15', 'Basketball', 'Staples Center, Los Angeles'),
+('Wimbledon Finals', '2024-07-14', 'Tennis', 'All England Club, London'),
+('Formula 1 Grand Prix', '2024-10-07', 'Motorsport', 'Monza Circuit, Italy');
+
+-- Insert into Bettors table (plaintext passwords)
+INSERT INTO Bettors (Username, Password, Balance, Email, JoinDate, IsActive) VALUES
+('john_doe', 'password123', 1000, 'john@example.com', '2023-01-15', 1),
+('jane_smith', 'qwerty456', 1500, 'jane@example.com', '2023-02-20', 1),
+('mike_jones', 'letmein789', 800, 'mike@example.com', '2023-03-05', 1),
+('alice_wonder', 'supersecret', 1200, 'alice@example.com', '2023-04-22', 1);
+
+-- Insert into Bets table
+INSERT INTO Bets (BetDate, Odds, Amount, BettorsID, EventID, Status) VALUES
+('2024-05-20', 2.5, 200, 1, 1, 1),
+('2024-06-12', 1.8, 300, 2, 2, 0),
+('2024-07-10', 2.0, 150, 3, 3, 1),
+('2024-10-01', 3.5, 400, 4, 4, 0);
+
+Szerepkörök és jogosultságok tervezete:
+
+User: Bettor
+
+Regisztrálhat, fogadásokat tehet, egyenlegét kezelheti.
+Megtekintheti saját fogadásait és azok státuszát.
+
+
+Nem fér hozzá adminisztrációs funkciókhoz (pl. új események létrehozása, felhasználók kezelése).
+
+Moderator: Organizer
+
+Minden jogot megkap, amit a User szerepkör is, de ezen felül:
+Láthatja más felhasználók fogadásait.
+Adminisztrálhatja a felhasználókat (pl. letilthatja őket, vagy aktiválhatja a fiókjukat).
+Felülvizsgálhatja és módosíthatja a fogadások státuszát.
+Új eseményeket hozhat létre vagy törölhet.
+Módosíthatja az események adatait (pl. időpont, helyszín).
+
+Admin:
+
+Teljes hozzáférése van az összes felhasználó adatához, beleértve azok egyenlegét, státuszát, és jelszavait (hash-elve).
+Új felhasználó, meglévő törlése, jelszó alaphelyzetbe hozása, 
