@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:VegasHU"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
+    <Grid Background="#323232">
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Height="450" Background="#3A3A3A">
+            
+        </StackPanel>
     </Grid>
 </Window>
