@@ -3,9 +3,37 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:VegasHU"
         mc:Ignorable="d"
-        Title="VegasHU Bejelentkezés" Height="500" Width="450"
-        WindowStartupLocation="CenterScreen">
+        Title="VegasHU Bejelentkezés" Height="760" Width="450"
+        WindowStartupLocation="CenterScreen"     
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="#323232"
+        AllowsTransparency="True"
+        WindowStyle="None">
 
+    <materialDesign:Card UniformCornerRadius="15" Background="{DynamicResource MaterialDesignPaper}" Margin="25">
+
+        <materialDesign:DialogHost CloseOnClickAway="True" x:Name="DialogHost">
+            <StackPanel>
+                <materialDesign:PopupBox HorizontalAlignment="Right" Margin="0 20 20 0" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Height="25">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                        <Button ToolTip="Probléma a bejelentkezéssel?" Content="Segítség"></Button>
+                        <Button ToolTip="Alkalmazás bezárása" Content="Bezárás" x:Name="btnExit" Click="btnExit_Click"></Button>
+                    </StackPanel>
+                </materialDesign:PopupBox>
+                <Image Source="/Images/vegashu-img.png" Height="182"/>
+                <TextBlock HorizontalAlignment="Center" FontSize="28" FontWeight="Bold" Text="Bejelentkezés" Foreground="White" Height="50"/>
+                <TextBlock HorizontalAlignment="Center" FontSize="17" Text="Jelentkezz be a már meglévő fiókodba!" Foreground="White" Height="23"/>
+                <TextBox Margin="0 50 0 0" Foreground="#784599" x:Name="tbUsername" Width="300" FontSize="18" materialDesign:HintAssist.Hint="felhasználónév" materialDesign:HintAssist.Foreground="#784599" materialDesign:TextFieldAssist.UnderlineBrush="#784599" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                <PasswordBox Margin="0 35 0 0" Foreground="#784599" x:Name="tbPassword" Width="300" FontSize="18" materialDesign:HintAssist.Hint="jelszó" materialDesign:HintAssist.Foreground="#784599" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
+
+                <Button Margin="0 35 0 0" x:Name="btnLogin" Style="{StaticResource MaterialDesignFlatButton}" Height="50" Width="300" materialDesign:ButtonAssist.CornerRadius="6" FontSize="18" Content="Bejelentkezés" Background="#784599" Foreground="White" Click="btnLogin_Click"></Button>
+                <Button Margin="0 20 0 0" x:Name="btnToRegister" Style="{StaticResource MaterialDesignFlatButton}" Height="50" Width="300" materialDesign:ButtonAssist.CornerRadius="6" FontSize="18" Content="Fiók regisztráció" FontWeight="Bold" Foreground="#784599" Click="btnToRegister_Click"></Button>
+            </StackPanel>
+        </materialDesign:DialogHost>
+        
+    </materialDesign:Card>
+        
 </Window>
