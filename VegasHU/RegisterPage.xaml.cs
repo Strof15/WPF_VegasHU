@@ -44,7 +44,7 @@ namespace VegasHU
             {
                 connection.Open();
 
-                const string query = @"INSERT INTO Bettors (username, password, email, joindate) VALUES (@username, @password, @mail, @joindate)";
+                string query = @"INSERT INTO Bettors (username, password, email, joindate) VALUES (@username, @password, @mail, @joindate)";
 
                 using (var command = new MySqlCommand(query, connection))
                 {

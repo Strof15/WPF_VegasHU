@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:VegasHU"
         mc:Ignorable="d"
-        Title="MainPage" Height="800" Width="1000" WindowStartupLocation="CenterScreen">
+        Title="VegasHU Sportfogadás" Height="900" Width="1400" WindowStartupLocation="CenterScreen">
     
     <Window.Resources>
         <!-- ResourceDictionary importálása -->
@@ -67,107 +67,11 @@
                 <!--Cards-->
                 <Grid>
                     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Height="300" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,150,20,0">
-                        <StackPanel Orientation="Horizontal">
-                            <Border Style="{DynamicResource ColoredStackPanelBorder}">
-                                <StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                    <Label Style="{DynamicResource SmallLabels}" Content="Labdarugás"/>
-                                    <Label Style="{DynamicResource SmallLabels}" Content="10.11" Margin="240 0 0 0"/>
-                                    </StackPanel>
-                                    <Label Style="{DynamicResource MediumLabels}" Content="FC Barcelona nyeri a mérkőzést?"/>
-                                    <Button Margin="0 20 0 0" Width="90" Height="60">
-                                        <StackPanel Orientation="Vertical">
-                                            <Label Style="{DynamicResource LargeLabels}" Content="2.1"/>
-                                            <Label Style="{DynamicResource SmallLabels}" Content="Igen" Margin="0 0 0 0"/>
-                                        </StackPanel>
-                                    </Button>
-                                </StackPanel>
-                            </Border>
-
-                            <Border Style="{DynamicResource ColoredStackPanelBorder}">
-                                <StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Label Style="{DynamicResource SmallLabels}" Content="Labdarugás"/>
-                                        <Label Style="{DynamicResource SmallLabels}" Content="10.11" Margin="240 0 0 0"/>
-                                    </StackPanel>
-                                    <Label Style="{DynamicResource MediumLabels}" Content="FC Barcelona nyeri a mérkőzést?"/>
-                                    <Button Margin="0 20 0 0" Width="90" Height="60">
-                                        <StackPanel Orientation="Vertical">
-                                            <Label Style="{DynamicResource LargeLabels}" Content="2.1"/>
-                                            <Label Style="{DynamicResource SmallLabels}" Content="Igen" Margin="0 0 0 0"/>
-                                        </StackPanel>
-                                    </Button>
-                                </StackPanel>
-                            </Border>
-
-                            <Border Style="{DynamicResource ColoredStackPanelBorder}">
-                                <StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Label Style="{DynamicResource SmallLabels}" Content="Labdarugás"/>
-                                        <Label Style="{DynamicResource SmallLabels}" Content="10.11" Margin="240 0 0 0"/>
-                                    </StackPanel>
-                                    <Label Style="{DynamicResource MediumLabels}" Content="FC Barcelona nyeri a mérkőzést?"/>
-                                    <Button Margin="0 20 0 0" Width="90" Height="60">
-                                        <StackPanel Orientation="Vertical">
-                                            <Label Style="{DynamicResource LargeLabels}" Content="2.1"/>
-                                            <Label Style="{DynamicResource SmallLabels}" Content="Igen" Margin="0 0 0 0"/>
-                                        </StackPanel>
-                                    </Button>
-                                </StackPanel>
-                            </Border>
-
-                            <Border Style="{DynamicResource ColoredStackPanelBorder}">
-                                <StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Label Style="{DynamicResource SmallLabels}" Content="Labdarugás"/>
-                                        <Label Style="{DynamicResource SmallLabels}" Content="10.11" Margin="240 0 0 0"/>
-                                    </StackPanel>
-                                    <Label Style="{DynamicResource MediumLabels}" Content="FC Barcelona nyeri a mérkőzést?"/>
-                                    <Button Margin="0 20 0 0" Width="90" Height="60">
-                                        <StackPanel Orientation="Vertical">
-                                            <Label Style="{DynamicResource LargeLabels}" Content="2.1"/>
-                                            <Label Style="{DynamicResource SmallLabels}" Content="Igen" Margin="0 0 0 0"/>
-                                        </StackPanel>
-                                    </Button>
-                                </StackPanel>
-                            </Border>
-
-                            <Border Style="{DynamicResource ColoredStackPanelBorder}">
-                                <StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Label Style="{DynamicResource SmallLabels}" Content="Labdarugás"/>
-                                        <Label Style="{DynamicResource SmallLabels}" Content="10.11" Margin="240 0 0 0"/>
-                                    </StackPanel>
-                                    <Label Style="{DynamicResource MediumLabels}" Content="FC Barcelona nyeri a mérkőzést?"/>
-                                    <Button Margin="0 20 0 0" Width="90" Height="60">
-                                        <StackPanel Orientation="Vertical">
-                                            <Label Style="{DynamicResource LargeLabels}" Content="2.1"/>
-                                            <Label Style="{DynamicResource SmallLabels}" Content="Igen" Margin="0 0 0 0"/>
-                                        </StackPanel>
-                                    </Button>
-                                </StackPanel>
-                            </Border>
-
-                            <Border Style="{DynamicResource ColoredStackPanelBorder}">
-                                <StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Label Style="{DynamicResource SmallLabels}" Content="Labdarugás"/>
-                                        <Label Style="{DynamicResource SmallLabels}" Content="10.11" Margin="240 0 0 0"/>
-                                    </StackPanel>
-                                    <Label Style="{DynamicResource MediumLabels}" Content="FC Barcelona nyeri a mérkőzést?"/>
-                                    <Button Margin="0 20 0 0" Width="90" Height="60">
-                                        <StackPanel Orientation="Vertical">
-                                            <Label Style="{DynamicResource LargeLabels}" Content="2.1"/>
-                                            <Label Style="{DynamicResource SmallLabels}" Content="Igen" Margin="0 0 0 0"/>
-                                        </StackPanel>
-                                    </Button>
-                                </StackPanel>
-                            </Border>
-
-
+                        <StackPanel Orientation="Horizontal" x:Name="mainStackPanel">
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>
+
                 <!--icons-->
 
                 <!--betts-->

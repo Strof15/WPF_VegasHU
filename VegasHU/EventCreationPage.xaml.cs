@@ -59,7 +59,7 @@ namespace VegasHU
             {
                 connection.Open();
 
-                const string query = @"INSERT INTO Events (EventName, EventDate, Category, Location) 
+                string query = @"INSERT INTO Events (EventName, EventDate, Category, Location) 
                                VALUES (@eventname, @eventdate, @category, @location)";
 
                 using (var command = new MySqlCommand(query, connection))
