@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VegasHU"
         mc:Ignorable="d"
-        Title="VegasHU Eseménykezelés" Height="600" Width="1000" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Title="VegasHU Eseménykezelés" Height="600" Width="1000" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent" >
     <Grid>
         <DockPanel Grid.ColumnSpan="3">
             <!--Nav-->
