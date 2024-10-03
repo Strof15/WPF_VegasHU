@@ -6,7 +6,17 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:VegasHU"
         mc:Ignorable="d"
-        Title="MainPage" Height="600" Width="1000" WindowStartupLocation="CenterScreen">
+        Title="MainPage" Height="800" Width="1000" WindowStartupLocation="CenterScreen">
+    
+    <Window.Resources>
+        <!-- ResourceDictionary importálása -->
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/StyleCard.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
     <Grid>
         <!-- Színek -->
         <!-- #784599 Lila -->
@@ -51,7 +61,47 @@
                     </StackPanel>
                 </materialDesign:PopupBox>
 
-                <TextBlock Text="Main Content Area" FontSize="32" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <!--name-->
+                <TextBlock Text="Sportfogadás" FontSize="32" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20 60 0 0" Foreground="White"/>
+
+                <!--Cards-->
+                <Grid>
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Height="300" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,150,20,0">
+                        <StackPanel Orientation="Horizontal">
+
+                            <Border Style="{DynamicResource ColoredStackPanelBorder}">
+                                <StackPanel Style="{DynamicResource ColoredStackPanel}">
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{DynamicResource ColoredStackPanelBorder}">
+                                <StackPanel Style="{DynamicResource ColoredStackPanel}">
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{DynamicResource ColoredStackPanelBorder}">
+                                <StackPanel Style="{DynamicResource ColoredStackPanel}">
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{DynamicResource ColoredStackPanelBorder}">
+                                <StackPanel Style="{DynamicResource ColoredStackPanel}">
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{DynamicResource ColoredStackPanelBorder}">
+                                <StackPanel Style="{DynamicResource ColoredStackPanel}">
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{DynamicResource ColoredStackPanelBorder}">
+                                <StackPanel Style="{DynamicResource ColoredStackPanel}">
+                                </StackPanel>
+                            </Border>
+                            
+
+
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+                <!--icons-->
+
+                <!--betts-->
             </Grid>
         </DockPanel>
     </Grid>
