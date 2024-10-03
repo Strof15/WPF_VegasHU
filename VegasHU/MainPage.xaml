@@ -7,16 +7,17 @@
         xmlns:local="clr-namespace:VegasHU"
         mc:Ignorable="d"
         Title="VegasHU Sportfogadás" Height="900" Width="1400" WindowStartupLocation="CenterScreen">
-    
+
     <Window.Resources>
         <!-- ResourceDictionary importálása -->
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/StyleCard.xaml"/>
+                <ResourceDictionary Source="Styles/StyleTabControl.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    
+
     <Grid>
         <!-- Színek -->
         <!-- #784599 Lila -->
@@ -73,8 +74,213 @@
                 </Grid>
 
                 <!--icons-->
+                <Grid Margin="0 470 0 0">
+                    <TabControl Margin="10" x:Name="tabControl" TabStripPlacement="Top">
+                        <TabItem x:Name="tabFootball" Style="{StaticResource CustomTabItemStyle}">
+                            <TabItem.Header>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Image Source="Images/001-football.png" Width="50" Margin="10"/>
+                                </StackPanel>
+                            </TabItem.Header>
+                            <Border Style="{DynamicResource ListedCardBorder}">
+                                <StackPanel Style="{DynamicResource ListedCard}">
+                                    <Border Style="{DynamicResource ListedCardItemsBorder}" Width="auto" Height="380">
+                                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                                            <UniformGrid Columns="1" Margin="10">
+                                                <StackPanel Style="{DynamicResource ListedCardItems}" Height="60" Margin="5" HorizontalAlignment="Center">
+                                                    <Label Content="10.21" Style="{DynamicResource SmallLabels}" Margin="50 0 0 0"/>
+                                                    <Border Style="{DynamicResource ListedCardItemsIcon}">
+                                                        <Label>
+                                                            <Image Source="Images/001-football.png" Width="20"/>
+                                                        </Label>
+                                                    </Border>
+                                                    <Label Content="Fc Barcelona Fog győzni?" Style="{DynamicResource MediumLabels}" Margin="10 12 0 0"/>
+                                                    <Label Content="Igen" Style="{DynamicResource SmallLabels}" Margin="100 0 20 0"/>
+                                                    <Label Content="2.1" Style="{DynamicResource LargeLabels}" Background="#784599" Margin="0 0 50 0"/>
+                                                </StackPanel>
+                                                <StackPanel Style="{DynamicResource ListedCardItems}" Height="60" Margin="5" HorizontalAlignment="Center">
+                                                    <Label Content="10.21" Style="{DynamicResource SmallLabels}" Margin="50 0 0 0"/>
+                                                    <Border Style="{DynamicResource ListedCardItemsIcon}">
+                                                        <Label>
+                                                            <Image Source="Images/001-football.png" Width="20"/>
+                                                        </Label>
+                                                    </Border>
+                                                    <Label Content="Fc Barcelona Fog győzni?" Style="{DynamicResource MediumLabels}" Margin="10 12 0 0"/>
+                                                    <Label Content="Igen" Style="{DynamicResource SmallLabels}" Margin="100 0 20 0"/>
+                                                    <Label Content="2.1" Style="{DynamicResource LargeLabels}" Background="#784599" Margin="0 0 50 0"/>
+                                                </StackPanel>
+                                                <StackPanel Style="{DynamicResource ListedCardItems}" Height="60" Margin="5" HorizontalAlignment="Center">
+                                                    <Label Content="10.21" Style="{DynamicResource SmallLabels}" Margin="50 0 0 0"/>
+                                                    <Border Style="{DynamicResource ListedCardItemsIcon}">
+                                                        <Label>
+                                                            <Image Source="Images/001-football.png" Width="20"/>
+                                                        </Label>
+                                                    </Border>
+                                                    <Label Content="Fc Barcelona Fog győzni?" Style="{DynamicResource MediumLabels}" Margin="10 12 0 0"/>
+                                                    <Label Content="Igen" Style="{DynamicResource SmallLabels}" Margin="100 0 20 0"/>
+                                                    <Label Content="2.1" Style="{DynamicResource LargeLabels}" Background="#784599" Margin="0 0 50 0"/>
+                                                </StackPanel>
+                                                <StackPanel Style="{DynamicResource ListedCardItems}" Height="60" Margin="5" HorizontalAlignment="Center">
+                                                    <Label Content="10.21" Style="{DynamicResource SmallLabels}" Margin="50 0 0 0"/>
+                                                    <Border Style="{DynamicResource ListedCardItemsIcon}">
+                                                        <Label>
+                                                            <Image Source="Images/001-football.png" Width="20"/>
+                                                        </Label>
+                                                    </Border>
+                                                    <Label Content="Fc Barcelona Fog győzni?" Style="{DynamicResource MediumLabels}" Margin="10 12 0 0"/>
+                                                    <Label Content="Igen" Style="{DynamicResource SmallLabels}" Margin="100 0 20 0"/>
+                                                    <Label Content="2.1" Style="{DynamicResource LargeLabels}" Background="#784599" Margin="0 0 50 0"/>
+                                                </StackPanel>
+                                                <StackPanel Style="{DynamicResource ListedCardItems}" Height="60" Margin="5" HorizontalAlignment="Center">
+                                                    <Label Content="10.21" Style="{DynamicResource SmallLabels}" Margin="50 0 0 0"/>
+                                                    <Border Style="{DynamicResource ListedCardItemsIcon}">
+                                                        <Label>
+                                                            <Image Source="Images/001-football.png" Width="20"/>
+                                                        </Label>
+                                                    </Border>
+                                                    <Label Content="Fc Barcelona Fog győzni?" Style="{DynamicResource MediumLabels}" Margin="10 12 0 0"/>
+                                                    <Label Content="Igen" Style="{DynamicResource SmallLabels}" Margin="100 0 20 0"/>
+                                                    <Label Content="2.1" Style="{DynamicResource LargeLabels}" Background="#784599" Margin="0 0 50 0"/>
+                                                </StackPanel>
+                                                <StackPanel Style="{DynamicResource ListedCardItems}" Height="60" Margin="5" HorizontalAlignment="Center">
+                                                    <Label Content="10.21" Style="{DynamicResource SmallLabels}" Margin="50 0 0 0"/>
+                                                    <Border Style="{DynamicResource ListedCardItemsIcon}">
+                                                        <Label>
+                                                            <Image Source="Images/001-football.png" Width="20"/>
+                                                        </Label>
+                                                    </Border>
+                                                    <Label Content="Fc Barcelona Fog győzni?" Style="{DynamicResource MediumLabels}" Margin="10 12 0 0"/>
+                                                    <Label Content="Igen" Style="{DynamicResource SmallLabels}" Margin="100 0 20 0"/>
+                                                    <Label Content="2.1" Style="{DynamicResource LargeLabels}" Background="#784599" Margin="0 0 50 0"/>
+                                                </StackPanel>
+                                                <StackPanel Style="{DynamicResource ListedCardItems}" Height="60" Margin="5" HorizontalAlignment="Center">
+                                                    <Label Content="10.21" Style="{DynamicResource SmallLabels}" Margin="50 0 0 0"/>
+                                                    <Border Style="{DynamicResource ListedCardItemsIcon}">
+                                                        <Label>
+                                                            <Image Source="Images/001-football.png" Width="20"/>
+                                                        </Label>
+                                                    </Border>
+                                                    <Label Content="Fc Barcelona Fog győzni?" Style="{DynamicResource MediumLabels}" Margin="10 12 0 0"/>
+                                                    <Label Content="Igen" Style="{DynamicResource SmallLabels}" Margin="100 0 20 0"/>
+                                                    <Label Content="2.1" Style="{DynamicResource LargeLabels}" Background="#784599" Margin="0 0 50 0"/>
+                                                </StackPanel>
+                                                <StackPanel Style="{DynamicResource ListedCardItems}" Height="60" Margin="5" HorizontalAlignment="Center">
+                                                    <Label Content="10.21" Style="{DynamicResource SmallLabels}" Margin="50 0 0 0"/>
+                                                    <Border Style="{DynamicResource ListedCardItemsIcon}">
+                                                        <Label>
+                                                            <Image Source="Images/001-football.png" Width="20"/>
+                                                        </Label>
+                                                    </Border>
+                                                    <Label Content="Fc Barcelona Fog győzni?" Style="{DynamicResource MediumLabels}" Margin="10 12 0 0"/>
+                                                    <Label Content="Igen" Style="{DynamicResource SmallLabels}" Margin="100 0 20 0"/>
+                                                    <Label Content="2.1" Style="{DynamicResource LargeLabels}" Background="#784599" Margin="0 0 50 0"/>
+                                                </StackPanel>
+                                                <StackPanel Style="{DynamicResource ListedCardItems}" Height="60" Margin="5" HorizontalAlignment="Center">
+                                                    <Label Content="10.21" Style="{DynamicResource SmallLabels}" Margin="50 0 0 0"/>
+                                                    <Border Style="{DynamicResource ListedCardItemsIcon}">
+                                                        <Label>
+                                                            <Image Source="Images/001-football.png" Width="20"/>
+                                                        </Label>
+                                                    </Border>
+                                                    <Label Content="Fc Barcelona Fog győzni?" Style="{DynamicResource MediumLabels}" Margin="10 12 0 0"/>
+                                                    <Label Content="Igen" Style="{DynamicResource SmallLabels}" Margin="100 0 20 0"/>
+                                                    <Label Content="2.1" Style="{DynamicResource LargeLabels}" Background="#784599" Margin="0 0 50 0"/>
+                                                </StackPanel>
+                                                <StackPanel Style="{DynamicResource ListedCardItems}" Height="60" Margin="5" HorizontalAlignment="Center">
+                                                    <Label Content="10.21" Style="{DynamicResource SmallLabels}" Margin="50 0 0 0"/>
+                                                    <Border Style="{DynamicResource ListedCardItemsIcon}">
+                                                        <Label>
+                                                            <Image Source="Images/001-football.png" Width="20"/>
+                                                        </Label>
+                                                    </Border>
+                                                    <Label Content="Fc Barcelona Fog győzni?" Style="{DynamicResource MediumLabels}" Margin="10 12 0 0"/>
+                                                    <Label Content="Igen" Style="{DynamicResource SmallLabels}" Margin="100 0 20 0"/>
+                                                    <Label Content="2.1" Style="{DynamicResource LargeLabels}" Background="#784599" Margin="0 0 50 0"/>
+                                                </StackPanel>
+                                                <StackPanel Style="{DynamicResource ListedCardItems}" Height="60" Margin="5" HorizontalAlignment="Center">
+                                                    <Label Content="10.21" Style="{DynamicResource SmallLabels}" Margin="50 0 0 0"/>
+                                                    <Border Style="{DynamicResource ListedCardItemsIcon}">
+                                                        <Label>
+                                                            <Image Source="Images/001-football.png" Width="20"/>
+                                                        </Label>
+                                                    </Border>
+                                                    <Label Content="Fc Barcelona Fog győzni?" Style="{DynamicResource MediumLabels}" Margin="10 12 0 0"/>
+                                                    <Label Content="Igen" Style="{DynamicResource SmallLabels}" Margin="100 0 20 0"/>
+                                                    <Label Content="2.1" Style="{DynamicResource LargeLabels}" Background="#784599" Margin="0 0 50 0"/>
+                                                </StackPanel>
+                                                <StackPanel Style="{DynamicResource ListedCardItems}" Height="60" Margin="5" HorizontalAlignment="Center">
+                                                    <Label Content="10.21" Style="{DynamicResource SmallLabels}" Margin="50 0 0 0"/>
+                                                    <Border Style="{DynamicResource ListedCardItemsIcon}">
+                                                        <Label>
+                                                            <Image Source="Images/001-football.png" Width="20"/>
+                                                        </Label>
+                                                    </Border>
+                                                    <Label Content="Fc Barcelona Fog győzni?" Style="{DynamicResource MediumLabels}" Margin="10 12 0 0"/>
+                                                    <Label Content="Igen" Style="{DynamicResource SmallLabels}" Margin="100 0 20 0"/>
+                                                    <Label Content="2.1" Style="{DynamicResource LargeLabels}" Background="#784599" Margin="0 0 50 0"/>
+                                                </StackPanel>
+                                                <StackPanel Style="{DynamicResource ListedCardItems}" Height="60" Margin="5" HorizontalAlignment="Center">
+                                                    <Label Content="10.21" Style="{DynamicResource SmallLabels}" Margin="50 0 0 0"/>
+                                                    <Border Style="{DynamicResource ListedCardItemsIcon}">
+                                                        <Label>
+                                                            <Image Source="Images/001-football.png" Width="20"/>
+                                                        </Label>
+                                                    </Border>
+                                                    <Label Content="Fc Barcelona Fog győzni?" Style="{DynamicResource MediumLabels}" Margin="10 12 0 0"/>
+                                                    <Label Content="Igen" Style="{DynamicResource SmallLabels}" Margin="100 0 20 0"/>
+                                                    <Label Content="2.1" Style="{DynamicResource LargeLabels}" Background="#784599" Margin="0 0 50 0"/>
+                                                </StackPanel>
+                                                
+                                            </UniformGrid>
+                                        </ScrollViewer>
+                                    </Border>
+                                </StackPanel>
+                            </Border>
+                        </TabItem>
+                        <TabItem x:Name="tabDarts" Style="{StaticResource CustomTabItemStyle}">
+                            <TabItem.Header>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <Image Source="Images/001-Dart.png" Width="50" Margin="10"/>
+                                </StackPanel>
+                            </TabItem.Header>
+                            <Grid>
+                                <Label Content="Content goes here..." HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="tabVolleyball" Style="{StaticResource CustomTabItemStyle}">
+                            <TabItem.Header>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <Image Source="Images/002-volleyball.png" Width="50" Margin="10"/>
+                                </StackPanel>
+                            </TabItem.Header>
+                            <Grid>
+                                <Label Content="Content goes here..." HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="tabHockey" Style="{StaticResource CustomTabItemStyle}">
+                            <TabItem.Header>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <Image Source="Images/003-hockey-sticks.png" Width="50" Margin="10"/>
+                                </StackPanel>
+                            </TabItem.Header>
+                            <Grid>
+                                <Label Content="Content goes here..." HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem x:Name="tabBasketball" Style="{StaticResource CustomTabItemStyle}">
+                            <TabItem.Header>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <Image Source="Images/002-basketball-ball-variant.png" Width="50" Margin="10"/>
+                                </StackPanel>
+                            </TabItem.Header>
+                            <Grid>
+                                <Label Content="Content goes here..." HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
 
-                <!--betts-->
+
             </Grid>
         </DockPanel>
     </Grid>

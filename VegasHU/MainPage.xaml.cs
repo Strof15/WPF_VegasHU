@@ -2,27 +2,22 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using VegasHU.Models;
+
 namespace VegasHU
 {
     public partial class MainPage : Window
     {
         private readonly string connectionString = "Server=localhost;Database=vegashu;Uid=root;Pwd=;";
+
         public MainPage()
         {
             InitializeComponent();
             LoadEventCards();
         }
+
         private void LoadEventCards()
         {
             List<Event> events = GetEventsFromDatabase();
@@ -121,6 +116,7 @@ namespace VegasHU
             }
             return events;
         }
+
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
@@ -132,5 +128,6 @@ namespace VegasHU
             Loginwindow.Show();
             this.Close();
         }
+       
     }
 }
