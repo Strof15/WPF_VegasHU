@@ -21,6 +21,7 @@ namespace VegasHU
         public EventCreationPage()
         {
             InitializeComponent();
+            NewEventPanelShow();
         }
         private void btnCreateEvent_Click(object sender, RoutedEventArgs e)
         {
@@ -96,14 +97,24 @@ namespace VegasHU
 
         private void btnListEvents_Click(object sender, RoutedEventArgs e)
         {
-            EventListPanel.Visibility = Visibility.Visible;
-            NewEventPanel.Visibility = Visibility.Collapsed;
+            EventListPanelShow();
         }
 
         private void btnCreateEvents_Click(object sender, RoutedEventArgs e)
         {
-            EventListPanel.Visibility = Visibility.Collapsed;
-            NewEventPanel.Visibility = Visibility.Visible;
+            NewEventPanelShow();
         }
+
+        private void NewEventPanelShow() {
+            NewEventPanel.Visibility = Visibility.Visible;
+            EventListPanel.Visibility = Visibility.Collapsed;
+        }
+
+        private void EventListPanelShow()
+        {
+            NewEventPanel.Visibility = Visibility.Collapsed;
+            EventListPanel.Visibility = Visibility.Visible;
+        }
+
     }
 }
