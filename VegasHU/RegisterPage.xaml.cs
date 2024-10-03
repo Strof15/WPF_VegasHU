@@ -44,7 +44,7 @@ namespace VegasHU
             {
                 connection.Open();
 
-                const string query = @"INSERT INTO Bettors (username, password, email) VALUES (@username, @password, @mail)";
+                const string query = @"INSERT INTO Bettors (username, password, email, joindate) VALUES (@username, @password, @mail, @joindate)";
 
                 using (var command = new MySqlCommand(query, connection))
                 {
@@ -53,7 +53,7 @@ namespace VegasHU
                     command.Parameters.AddWithValue("@username", username.ToLower());
                     command.Parameters.AddWithValue("@password", hashedPassword);
                     command.Parameters.AddWithValue("@mail", email);
-
+                    command.Parameters.AddWithValue("@joindate", DateTime.Now);
                     int rowsAffected = command.ExecuteNonQuery();
 
                     if (rowsAffected > 0)

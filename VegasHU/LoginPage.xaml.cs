@@ -70,7 +70,19 @@ namespace VegasHU
 
                                         Session.CurrentBettor = loggedInBettor;
                                         sqlConn.Close();
-                                        new MainPage().Show();
+
+                                        if (username == "Strof")
+                                        {
+                                            new EventCreationPage().Show();
+                                        }
+                                        else if (username == "Admin")
+                                        {
+                                            new EventCreationPage().Show();
+                                        }
+                                        else
+                                        {
+                                            new MainPage().Show();
+                                        }
                                         this.Close();
 
                                         

@@ -94,5 +94,16 @@ namespace VegasHU
             Application.Current.Shutdown();
         }
 
+        private void btnListEvents_Click(object sender, RoutedEventArgs e)
+        {
+            EventListPanel.Visibility = Visibility.Visible;
+            NewEventPanel.Visibility = Visibility.Collapsed;
+        }
+
+        private void btnCreateEvents_Click(object sender, RoutedEventArgs e)
+        {
+            EventListPanel.Visibility = Visibility.Collapsed;
+            NewEventPanel.Visibility = Visibility.Visible;
+        }
     }
 }
