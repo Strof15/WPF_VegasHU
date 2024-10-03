@@ -18,7 +18,7 @@ namespace VegasHU
 {
     public partial class RegisterPage : Window
     {
-        private readonly string ConnString = "Server=localhost;Database=vegashu;Uid=root;Pwd=;";
+        private readonly string connectionString = "Server=localhost;Database=vegashu;Uid=root;Pwd=;";
         public RegisterPage()
         {
             InitializeComponent();
@@ -40,7 +40,7 @@ namespace VegasHU
 
         private void RegisterUser(string username, string password, string email)
         {
-            using (var connection = new MySqlConnection(ConnString))
+            using (var connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
 
@@ -133,7 +133,7 @@ namespace VegasHU
         }
         private void ShowErrorMessage(string message)
         {
-            MessageBox.Show(message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(message, "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void btnToLogin_Click(object sender, RoutedEventArgs e)

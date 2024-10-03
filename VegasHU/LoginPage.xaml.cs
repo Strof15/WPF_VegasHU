@@ -20,7 +20,7 @@ namespace VegasHU
 {
     public partial class LoginPage : Window
     {
-        private readonly string ConnectionString = "Server=localhost;Database=vegashu;Uid=root;Pwd=;";
+        private readonly string connectionString = "Server=localhost;Database=vegashu;Uid=root;Pwd=;";
         public LoginPage()
         {
             InitializeComponent();
@@ -35,7 +35,7 @@ namespace VegasHU
             {
                 try
                 {
-                    using (var sqlConn = new MySqlConnection(ConnectionString))
+                    using (var sqlConn = new MySqlConnection(connectionString))
                     {
                         sqlConn.Open();
 
