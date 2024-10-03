@@ -30,26 +30,13 @@ CREATE TABLE Events (
   Location VARCHAR(100) NOT NULL             
 );
 
--- Insert into Events table
-INSERT INTO Events (EventName, EventDate, Category, Location) VALUES
-('Champions League Final', '2024-05-25', 'Football', 'Wembley Stadium, London'),
-('NBA Finals Game 7', '2024-06-15', 'Basketball', 'Staples Center, Los Angeles'),
-('Wimbledon Finals', '2024-07-14', 'Tennis', 'All England Club, London'),
-('Formula 1 Grand Prix', '2024-10-07', 'Motorsport', 'Monza Circuit, Italy');
+EventCreator: Strof;Asd123
+Admin: Admin;Admin123
 
--- Insert into Bettors table (plaintext passwords)
-INSERT INTO Bettors (Username, Password, Balance, Email, JoinDate, IsActive) VALUES
-('john_doe', 'password123', 1000, 'john@example.com', '2023-01-15', 1),
-('jane_smith', 'qwerty456', 1500, 'jane@example.com', '2023-02-20', 1),
-('mike_jones', 'letmein789', 800, 'mike@example.com', '2023-03-05', 1),
-('alice_wonder', 'supersecret', 1200, 'alice@example.com', '2023-04-22', 1);
-
--- Insert into Bets table
-INSERT INTO Bets (BetDate, Odds, Amount, BettorsID, EventID, Status) VALUES
-('2024-05-20', 2.5, 200, 1, 1, 1),
-('2024-06-12', 1.8, 300, 2, 2, 0),
-('2024-07-10', 2.0, 150, 3, 3, 1),
-('2024-10-01', 3.5, 400, 4, 4, 0);
+INSERT INTO Bettors (Username, Password, Balance, Email, JoinDate, IsActive)
+VALUES 
+('strof', '$2a$11$bQK2PmgoNxFMqFQ4oLlRZ.rcg.HL8g3oIin3L.alDYGOK6XaF7jxq', 0, 'strof@gmail.com', '0000-00-00', 1),
+('admin', '$2a$11$dC4rTPSNpOCPEgE3dZbhB.Q6fYR2g/38au6SKxpKzreB3/KfMb1D2', 0, 'admin@admin.com', '0000-00-00', 1);
 
 Szerepkörök és jogosultságok tervezete:
 
