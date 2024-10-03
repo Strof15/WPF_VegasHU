@@ -18,7 +18,7 @@
         <DockPanel>
             <StackPanel DockPanel.Dock="Left" Background="#3A3A3A"  Width="200">
                 <Image Source="Images/vegashu-img.png"></Image>
-                <Button Margin="0 0 0 0" 
+                <Button Margin="0" 
                         x:Name="btnHome" Style="{StaticResource MaterialDesignFlatButton}" Height="50" Width="200" materialDesign:ButtonAssist.CornerRadius="6" FontSize="18" FontWeight="Light" Foreground="White">
                     <StackPanel Orientation="Horizontal" Height="40" Width="200">
                         <Image Source="Images/001-home.png" HorizontalAlignment="Left" Width="35" Margin="5"></Image>
@@ -26,14 +26,14 @@
                     </StackPanel>
                 </Button>
 
-                <Button Margin="0 0 0 0" x:Name="btnSportfogadás" Style="{StaticResource MaterialDesignFlatButton}" Height="50" Width="200" materialDesign:ButtonAssist.CornerRadius="6" FontSize="18" FontWeight="Light" Foreground="White">
+                <Button Margin="0" x:Name="btnSportfogadás" Style="{StaticResource MaterialDesignFlatButton}" Height="50" Width="200" materialDesign:ButtonAssist.CornerRadius="6" FontSize="18" FontWeight="Light" Foreground="White">
                     <StackPanel Orientation="Horizontal" Height="40" Width="200">
                         <Image Source="Images/002-poker-chip.png" HorizontalAlignment="Left" Width="35" Margin="5"></Image>
                         <TextBlock Margin="15,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Light" FontSize="18">Sportfogadás</TextBlock>
                     </StackPanel>
                 </Button>
 
-                <Button Margin="0 0 0 0" x:Name="btnÜgyfélszolgálat" Style="{StaticResource MaterialDesignFlatButton}" Height="50" Width="200" materialDesign:ButtonAssist.CornerRadius="6" FontSize="18" FontWeight="Light" Foreground="White">
+                <Button Margin="0" x:Name="btnÜgyfélszolgálat" Style="{StaticResource MaterialDesignFlatButton}" Height="50" Width="200" materialDesign:ButtonAssist.CornerRadius="6" FontSize="18" FontWeight="Light" Foreground="White">
                     <StackPanel Orientation="Horizontal" Height="40" Width="200">
                         <Image Source="Images/003-support.png" HorizontalAlignment="Left" Width="35" Margin="5"></Image>
                         <TextBlock Margin="15,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Light" FontSize="18">Ügyfélszolálat</TextBlock>
