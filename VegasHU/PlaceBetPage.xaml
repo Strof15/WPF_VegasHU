@@ -27,7 +27,7 @@
                 <TextBox Margin="0 50 0 0" Foreground="#784599" x:Name="tbUsername" Width="300" FontSize="18" materialDesign:HintAssist.Hint="felhasználónév" materialDesign:HintAssist.Foreground="#784599" materialDesign:TextFieldAssist.UnderlineBrush="#784599" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                 
 
-                <Button Margin="0 35 0 0" x:Name="btnLogin" Style="{StaticResource MaterialDesignFlatButton}" Height="50" Width="300" materialDesign:ButtonAssist.CornerRadius="6" FontSize="18" Content="Bejelentkezés" Background="#784599" Foreground="White" Click="btnLogin_Click"></Button>
+                <Button Margin="0 35 0 0" x:Name="btnPlaceBet" Style="{StaticResource MaterialDesignFlatButton}" Height="50" Width="300" materialDesign:ButtonAssist.CornerRadius="6" FontSize="18" Content="Bejelentkezés" Background="#784599" Foreground="White" Click="btnLogin_Click"></Button>
             </StackPanel>
         </materialDesign:DialogHost>
 
