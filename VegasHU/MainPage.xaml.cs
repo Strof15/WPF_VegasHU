@@ -23,5 +23,17 @@ namespace VegasHU
         {
             InitializeComponent();
         }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }      
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            LoginPage Loginwindow = new();
+            Loginwindow.Show();
+            this.Close();
+        }
     }
 }

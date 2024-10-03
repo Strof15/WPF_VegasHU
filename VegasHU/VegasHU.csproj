@@ -9,12 +9,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\001-dart.png" />
+    <None Remove="Images\001-football.png" />
+    <None Remove="Images\001-home.png" />
+    <None Remove="Images\002-basketball-ball-variant.png" />
+    <None Remove="Images\002-poker-chip.png" />
+    <None Remove="Images\002-sports.png" />
+    <None Remove="Images\002-volleyball.png" />
+    <None Remove="Images\003-hockey-sticks.png" />
+    <None Remove="Images\003-list.png" />
+    <None Remove="Images\003-support.png" />
+    <None Remove="Images\exit.png" />
     <None Remove="Images\vegashu-img.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Guide\" />
-    <Folder Include="Styles\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +35,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\001-dart.png" />
+    <Resource Include="Images\001-football.png" />
+    <Resource Include="Images\001-home.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\002-basketball-ball-variant.png" />
+    <Resource Include="Images\002-poker-chip.png" />
+    <Resource Include="Images\002-sports.png" />
+    <Resource Include="Images\002-volleyball.png" />
+    <Resource Include="Images\003-hockey-sticks.png" />
+    <Resource Include="Images\003-list.png" />
+    <Resource Include="Images\003-support.png" />
+    <Resource Include="Images\exit.png" />
     <Resource Include="Images\vegashu-img.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

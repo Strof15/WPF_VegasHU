@@ -26,6 +26,14 @@ namespace VegasHU
             InitializeComponent();
         }
 
+        private void tbPasswordbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                btnLogin_Click(sender, e);
+            }
+        }
+
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             string username = tbUsername.Text.Trim();
@@ -56,17 +64,21 @@ namespace VegasHU
                                         var loggedInBettor = new Bettors
                                         {
                                             BettorsId = Convert.ToInt32(reader["BettorsID"]),
-                                            Username = reader["Username"].ToString()
+                                            Username = reader["Username"].ToString(),
+
                                         };
 
                                         Session.CurrentBettor = loggedInBettor;
                                         sqlConn.Close();
-                                        new RegisterPage().Show();
-                                        Close();
+                                        new MainPage().Show();
+                                        this.Close();
+
+                                        
                                     }
                                     else
                                     {
                                         MessageBox.Show("Hibás jelszó!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+                                        tbPassword.Clear();
                                     }
                                 }
                                 else
