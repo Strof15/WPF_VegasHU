@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <Folder Include="Guide\" />
+    <Folder Include="Styles\" />
   </ItemGroup>
 
   <ItemGroup>
