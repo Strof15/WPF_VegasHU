@@ -38,6 +38,26 @@ VALUES
 ('strof', '$2a$11$bQK2PmgoNxFMqFQ4oLlRZ.rcg.HL8g3oIin3L.alDYGOK6XaF7jxq', 0, 'strof@gmail.com', '0000-00-00', 1),
 ('admin', '$2a$11$dC4rTPSNpOCPEgE3dZbhB.Q6fYR2g/38au6SKxpKzreB3/KfMb1D2', 0, 'admin@admin.com', '0000-00-00', 1);
 
+INSERT INTO Events (EventName, EventDate, Category, Location)
+VALUES
+('Barcelona nyeri a La Ligát?', '2024-12-15', 'Labdarugás', 'Barcelona, Spain'),
+('Miami Heat bejut a döntőbe?', '2024-12-05', 'Kosárlabda', 'Miami, USA'),
+('Játékidő döntetlennel zárul?', '2024-12-10', 'Jégkorong', 'Montreal, Canada'),
+('Peter Wright nyeri a World Matchplayt?', '2024-12-22', 'Darts', 'Blackpool, UK'),
+('Hajós Alfréd nyeri a bajnokságot?', '2025-01-30', 'Röplabda', 'Győr, Hungary'),
+
+('Ferencváros nyeri a Magyar Kupát?', '2025-01-20', 'Labdarugás', 'Budapest, Hungary'),
+('Golden State Warriors playoffba jut?', '2025-01-05', 'Kosárlabda', 'San Francisco, USA'),
+('Gólok száma 5.5 fölött?', '2025-02-12', 'Jégkorong', 'Vancouver, Canada'),
+('Gerwyn Price nyeri a Premier League-et?', '2025-02-08', 'Darts', 'Cardiff, UK'),
+('Kazincbarcika megnyeri a bajnokságot?', '2025-03-10', 'Röplabda', 'Miskolc, Hungary'),
+
+('Manchester United bejut a BL döntőbe?', '2025-03-25', 'Labdarugás', 'Manchester, UK'),
+('Lakers megnyeri a nyugati konferenciát?', '2025-04-15', 'Kosárlabda', 'Los Angeles, USA'),
+('Összes gól 3.5 fölött?', '2025-04-10', 'Jégkorong', 'New York, USA'),
+('Van Gerwen megnyeri a Players Championshipet?', '2025-04-20', 'Darts', 'Milton Keynes, UK'),
+('Békéscsaba megnyeri az NB I-et?', '2025-05-05', 'Röplabda', 'Békéscsaba, Hungary');
+
 Szerepkörök és jogosultságok tervezete:
 
 User: Bettor
