@@ -6,6 +6,9 @@ using System.Data.SqlTypes;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using VegasHU.Models;
 using static VegasHU.LoginPage;
 
@@ -21,6 +24,11 @@ namespace VegasHU
             LoadEventCards();
             LoadMoreEventsCards();
         }
+        //C:\Users\nagy.kristof.robert\Source\Repos\WPF_VegasHU\VegasHU\Images\001-football.png
+        //C:\Users\nagy.kristof.robert\Source\Repos\WPF_VegasHU\VegasHU\Images\001-dart.png
+        //C:\Users\nagy.kristof.robert\Source\Repos\WPF_VegasHU\VegasHU\Images\002-basketball.png
+        //C:\Users\nagy.kristof.robert\Source\Repos\WPF_VegasHU\VegasHU\Images\002-volleyball.png
+        //C:\Users\nagy.kristof.robert\Source\Repos\WPF_VegasHU\VegasHU\Images\003-hockey-sticks.png
 
         private void LoadEventCards()
         {
@@ -109,59 +117,125 @@ namespace VegasHU
         {
             List<Event> events = GetEventsFromDatabase();
             Random random = new Random();
+            string result = random.Next(2) == 0 ? "Igen" : "Nem";
 
-            // Iterate over each betting event
             foreach (var bettingEvent in events)
             {
                 Border eventCardBorder = new Border
                 {
-                    Style = (Style)FindResource("ColoredStackPanelBorder")
+                    Width = 800,
+                    Height = 100,
+                    BorderThickness = new Thickness(2),
+                    BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#784599")),
+                    CornerRadius = new CornerRadius(5),
+                    Margin = new Thickness(5),
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
                 };
 
-                StackPanel eventCardStack = new StackPanel();
-
+                StackPanel eventCardStack = new StackPanel() { Orientation = Orientation.Horizontal };
                 StackPanel horizontalStack = new StackPanel { Orientation = Orientation.Horizontal };
+
                 Label sportLabel = new Label
                 {
                     Style = (Style)FindResource("SmallLabels"),
-                    Content = bettingEvent.Category
+                    Width = 80,
+                    Content = bettingEvent.Category,
+                    Margin = new Thickness(20, 0, 5, 0),
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
                 };
                 Label dateLabel = new Label
                 {
                     Style = (Style)FindResource("SmallLabels"),
                     Content = bettingEvent.EventDate.ToString("MM.dd"),
-                    Margin = new Thickness(240, 0, 0, 0)
+                    Margin = new Thickness(5, 0, 20, 0),
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
                 };
+
                 horizontalStack.Children.Add(sportLabel);
                 horizontalStack.Children.Add(dateLabel);
 
+                Border imageBorder = new Border
+                {
+                    BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#784599")),
+                    BorderThickness = new Thickness(1),
+                    Margin = new Thickness(0, 0, 5, 0),
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    CornerRadius = new CornerRadius(5),
+                    Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#3A3A3A"))
+                };
+
+                Image eventImage = new Image { Width = 20, Margin = new Thickness(15, 5, 15, 5) };
+
+                switch (bettingEvent.Category)
+                {
+                    case "Labdarugás":
+                        eventImage.Source = new BitmapImage(new Uri("C:\\Users\\nagy.kristof.robert\\Source\\Repos\\WPF_VegasHU\\VegasHU\\Images\\001-football.png"));
+                        FootballEventsGrid.Children.Add(eventCardBorder);
+                        break;
+                    case "Darts":
+                        eventImage.Source = new BitmapImage(new Uri("C:\\Users\\nagy.kristof.robert\\Source\\Repos\\WPF_VegasHU\\VegasHU\\Images\\001-dart.png"));
+                        DartsEventsGrid.Children.Add(eventCardBorder);
+                        break;
+                    case "Röplabda": 
+                        eventImage.Source = new BitmapImage(new Uri("C:\\Users\\nagy.kristof.robert\\Source\\Repos\\WPF_VegasHU\\VegasHU\\Images\\002-volleyball.png"));
+                        VolleyballEventsGrid.Children.Add(eventCardBorder);
+                        break;
+                    case "Jégkorong": 
+                        eventImage.Source = new BitmapImage(new Uri("C:\\Users\\nagy.kristof.robert\\Source\\Repos\\WPF_VegasHU\\VegasHU\\Images\\003-hockey-sticks.png"));
+                        HockeyEventsGrid.Children.Add(eventCardBorder);
+                        break;
+                    case "Kosárlabda":
+                        eventImage.Source = new BitmapImage(new Uri("C:\\Users\\nagy.kristof.robert\\Source\\Repos\\WPF_VegasHU\\VegasHU\\Images\\002-basketball.png"));
+                        BasketballEventsGrid.Children.Add(eventCardBorder);
+                        break;
+                    default:
+                        break; 
+                }
+
+                imageBorder.Child = eventImage;
+
                 Label eventNameLabel = new Label
                 {
+                    Width = 400,
+                    Height = 40,
+                    Content = bettingEvent.EventName,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
                     Style = (Style)FindResource("MediumLabels"),
-                    Content = bettingEvent.EventName
+                    Margin = new Thickness(0, 0, 20, 0)
+                };
+                Label resultLabel = new Label
+                {
+                    Margin = new Thickness(0, 10, 0, 0),
+                    Style = (Style)FindResource("SmallLabels"),
+                    Content = result,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
                 };
 
                 Button oddsButton = new Button
                 {
-                    Margin = new Thickness(0, 20, 0, 0),
-                    Width = 90,
-                    Height = 60
+                    Margin = new Thickness(0, 10, 0, 0),
+                    Width = 120,
+                    Height = 60,
+                    HorizontalAlignment = HorizontalAlignment.Right,
+                    VerticalAlignment = VerticalAlignment.Center
                 };
 
-                StackPanel oddsButtonStack = new StackPanel { Orientation = Orientation.Vertical };
+                StackPanel oddsButtonStack = new StackPanel { Orientation = Orientation.Horizontal };
 
                 double odds = Math.Round(random.NextDouble() * (4.0 - 1.5) + 1.5, 2);
-                string result = random.Next(2) == 0 ? "Igen" : "Nem";
 
                 Label oddsLabel = new Label
                 {
                     Style = (Style)FindResource("LargeLabels"),
-                    Content = odds.ToString()
-                };
-                Label resultLabel = new Label
-                {
-                    Style = (Style)FindResource("SmallLabels"),
-                    Content = result
+                    Content = odds.ToString(),
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
                 };
 
                 oddsButton.Click += (s, e) =>
@@ -181,33 +255,21 @@ namespace VegasHU
                 oddsButton.Content = oddsButtonStack;
 
                 eventCardStack.Children.Add(horizontalStack);
+                eventCardStack.Children.Add(imageBorder); 
                 eventCardStack.Children.Add(eventNameLabel);
                 eventCardStack.Children.Add(oddsButton);
-                eventCardBorder.Child = eventCardStack;
 
-                // Add the card to the corresponding tab based on event category
-                switch (bettingEvent.Category)
-                {
-                    case "Labdarugás": // Football
-                        ((StackPanel)tabFootball.Content).Children.Add(eventCardBorder);
-                        break;
-                    case "Darts":
-                        ((StackPanel)tabDarts.Content).Children.Add(eventCardBorder);
-                        break;
-                    case "Röplabda": // Volleyball
-                        ((StackPanel)tabVolleyball.Content).Children.Add(eventCardBorder);
-                        break;
-                    case "Jégkorong": // Hockey
-                        ((StackPanel)tabHockey.Content).Children.Add(eventCardBorder);
-                        break;
-                    case "Kosárlabda": // Basketball
-                        ((StackPanel)tabBasketball.Content).Children.Add(eventCardBorder);
-                        break;
-                    default:
-                        break; // Or handle unexpected categories
-                }
+                eventCardBorder.Child = eventCardStack;
             }
         }
+
+
+
+
+
+
+
+
 
         private List<Event> GetEventsFromDatabase()
         {
