@@ -89,6 +89,8 @@ namespace VegasHU
             }
         }
 
+
+
         private List<Event> GetEventsFromDatabase()
         {
             var events = new List<Event>();

@@ -12,7 +12,7 @@
     <None Remove="Images\001-dart.png" />
     <None Remove="Images\001-football.png" />
     <None Remove="Images\001-home.png" />
-    <None Remove="Images\002-basketball-ball-variant.png" />
+    <None Remove="Images\002-basketball.png" />
     <None Remove="Images\002-poker-chip.png" />
     <None Remove="Images\002-sports.png" />
     <None Remove="Images\002-volleyball.png" />
@@ -41,7 +41,9 @@
     <Resource Include="Images\001-home.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\002-basketball-ball-variant.png" />
+    <Resource Include="Images\002-basketball.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\002-poker-chip.png" />
     <Resource Include="Images\002-sports.png" />
     <Resource Include="Images\002-volleyball.png" />
