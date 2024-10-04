@@ -116,5 +116,37 @@ namespace VegasHU
             EventListPanel.Visibility = Visibility.Visible;
         }
 
+        private void tbEventName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateLabelContent(lblName, tbEventName.Text);
+        }
+        private void cbCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbCategories.SelectedItem is ComboBoxItem comboBoxItem)
+            {
+                UpdateLabelContent(lblCategory, comboBoxItem.Content.ToString());
+            }
+        }
+        private void tbEventLocation_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateLabelContent(lblLocation, tbEventLocation.Text);
+        }
+        private void dpEventDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (dpEventDate.SelectedDate.HasValue)
+            {
+                UpdateLabelContent(lblDate, dpEventDate.SelectedDate.Value.ToString("MM/dd/yyyy"));
+            }
+            else
+            {
+                UpdateLabelContent(lblDate, ""); 
+            }
+        }
+        private void UpdateLabelContent(Label label, string content)
+        {
+            label.Content = content;
+        }
+
+
     }
 }
