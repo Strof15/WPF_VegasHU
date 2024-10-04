@@ -20,6 +20,7 @@
     <None Remove="Images\003-list.png" />
     <None Remove="Images\003-support.png" />
     <None Remove="Images\exit.png" />
+    <None Remove="Images\user.png" />
     <None Remove="Images\vegashu-img.png" />
   </ItemGroup>
 
@@ -48,6 +49,7 @@
     <Resource Include="Images\003-list.png" />
     <Resource Include="Images\003-support.png" />
     <Resource Include="Images\exit.png" />
+    <Resource Include="Images\user.png" />
     <Resource Include="Images\vegashu-img.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
