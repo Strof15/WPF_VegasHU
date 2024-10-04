@@ -42,6 +42,12 @@
                             <TextBlock Margin="15,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Light" FontSize="18">Sportfogadás</TextBlock>
                         </StackPanel>
                     </Button>
+                    <Button Margin="0" x:Name="btnBets" Style="{StaticResource MaterialDesignFlatButton}" Height="50" Width="200" materialDesign:ButtonAssist.CornerRadius="6" FontSize="18" FontWeight="Light" Foreground="White">
+                        <StackPanel Orientation="Horizontal" Height="40" Width="200">
+                            <Image Source="Images/Ticket.png" HorizontalAlignment="Left" Width="35" Margin="5"></Image>
+                            <TextBlock Margin="15,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Light" FontSize="18">Fogadásaim</TextBlock>
+                        </StackPanel>
+                    </Button>
 
                     <Button Margin="0" x:Name="btnSupport" Style="{StaticResource MaterialDesignFlatButton}" Height="50" Width="200" materialDesign:ButtonAssist.CornerRadius="6" FontSize="18" FontWeight="Light" Foreground="White">
                         <StackPanel Orientation="Horizontal" Height="40" Width="200">
