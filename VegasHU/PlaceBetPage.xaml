@@ -24,18 +24,18 @@
                 <Image Source="/Images/vegashu-img.png" Height="182"/>
                 <TextBlock HorizontalAlignment="Center" FontSize="28" FontWeight="Bold" Text="VegasHU Szelvény" Foreground="White" Height="50"/>
                 <StackPanel>
-                    <TextBlock HorizontalAlignment="Center" FontSize="17" Foreground="White" Height="23" x:Name="lblTicketName" Text="FC Barcelona nyeri a mérkőzést?"/>
-                    <TextBlock HorizontalAlignment="Center" FontSize="17" Foreground="White" Height="23" x:Name="lblBoolean" Text="Igen"/>
-                    <TextBlock HorizontalAlignment="Center" FontSize="17" Foreground="White" Height="23" x:Name="lblOdds" Text="@3.2"/>
+                    <TextBlock HorizontalAlignment="Center" FontSize="17" Foreground="White" Height="23" x:Name="lblTicketName"/>
+                    <TextBlock HorizontalAlignment="Center" FontSize="17" Foreground="White" Height="23" x:Name="lblBoolean"/>
+                    <TextBlock HorizontalAlignment="Center" FontSize="17" Foreground="White" Height="23" x:Name="lblOdds"/>
                 </StackPanel>
                 <StackPanel Margin="0 30 0 50">
-                    <TextBlock x:Name="lblBalance" Text="Egyenleg: 10.000ft" Foreground="#fff" Margin="10" FontSize="14" Width="300"></TextBlock>
-                    <TextBox Foreground="#784599" x:Name="tbAmount" Width="300" FontSize="18" materialDesign:HintAssist.Hint="Fogadás tétje" materialDesign:HintAssist.Foreground="#784599" materialDesign:TextFieldAssist.UnderlineBrush="#784599" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                    <TextBlock x:Name="lblBalance" Foreground="#fff" Margin="10" FontSize="14" Width="300"></TextBlock>
+                    <TextBox Foreground="#784599" x:Name="tbAmount" Width="300" FontSize="18" materialDesign:HintAssist.Hint="Fogadás tétje" materialDesign:HintAssist.Foreground="#784599" materialDesign:TextFieldAssist.UnderlineBrush="#784599" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextChanged="tbAmount_TextChanged"/>
                 </StackPanel>
 
                 <StackPanel>
-                    <TextBlock HorizontalAlignment="Center" x:Name="lblPossibleWin" Text="Várható nyeremény: 32000 ft" Foreground="#fff" Margin="10" FontSize="14" ></TextBlock>
-                    <Button Margin="0 3 0 0" x:Name="btnPlaceBet" Style="{StaticResource MaterialDesignFlatButton}" Height="50" Width="300" materialDesign:ButtonAssist.CornerRadius="6" FontSize="18" Content="Fogadás" Background="#784599" Foreground="White"></Button>
+                    <TextBlock HorizontalAlignment="Center" x:Name="lblPossibleWin" Foreground="#fff" Margin="10" FontSize="14" ></TextBlock>
+                    <Button Margin="0 3 0 0" x:Name="btnPlaceBet" Style="{StaticResource MaterialDesignFlatButton}" Height="50" Width="300" materialDesign:ButtonAssist.CornerRadius="6" FontSize="18" Content="Fogadás" Background="#784599" Foreground="White" Click="btnPlaceBet_Click"></Button>
                 </StackPanel>
             </StackPanel>
         </materialDesign:DialogHost>

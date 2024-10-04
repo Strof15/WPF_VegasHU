@@ -1,10 +1,13 @@
 ﻿using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI.Common;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using VegasHU.Models;
+using static VegasHU.LoginPage;
 
 namespace VegasHU
 {
@@ -16,6 +19,7 @@ namespace VegasHU
         {
             InitializeComponent();
             LoadEventCards();
+
         }
 
         private void LoadEventCards()
@@ -61,9 +65,10 @@ namespace VegasHU
                     Width = 90,
                     Height = 60
                 };
+
                 StackPanel oddsButtonStack = new StackPanel { Orientation = Orientation.Vertical };
 
-                double odds = Math.Round(random.NextDouble() * (4.0 - 1.5) + 1.5, 1);
+                double odds = Math.Round(random.NextDouble() * (4.0 - 1.5) + 1.5, 2);
                 string result = random.Next(2) == 0 ? "Igen" : "Nem";
 
                 Label oddsLabel = new Label
@@ -76,6 +81,18 @@ namespace VegasHU
                     Style = (Style)FindResource("SmallLabels"),
                     Content = result
                 };
+                oddsButton.Click += (s, e) =>
+                {
+                    var placeBetPage = new PlaceBetPage(
+                        bettingEvent.EventName, 
+                        odds,
+                        result, 
+                        Session.CurrentBettor.Balance,
+                        bettingEvent.EventID
+                    );
+                    placeBetPage.ShowDialog();
+                };
+
                 oddsButtonStack.Children.Add(oddsLabel);
                 oddsButtonStack.Children.Add(resultLabel);
                 oddsButton.Content = oddsButtonStack;
@@ -96,7 +113,7 @@ namespace VegasHU
             using (var connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
-                string query = "SELECT EventName, EventDate, Category, Location FROM Events";
+                string query = "SELECT EventID,EventName, EventDate, Category, Location FROM Events";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     using (var reader = command.ExecuteReader())
@@ -105,6 +122,7 @@ namespace VegasHU
                         {
                             events.Add(new Event
                             {
+                                EventID = reader.GetInt32("EventID"),
                                 EventName = reader.GetString("EventName"),
                                 EventDate = reader.GetDateTime("EventDate"),
                                 Category = reader.GetString("Category"),
