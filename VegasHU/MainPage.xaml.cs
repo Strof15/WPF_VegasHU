@@ -1,12 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI.Common;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlTypes;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using VegasHU.Models;
@@ -23,7 +17,9 @@ namespace VegasHU
             InitializeComponent();
             LoadEventCards();
             LoadMoreEventsCards();
+            HomePanelShow();
         }
+
         //C:\Users\nagy.kristof.robert\Source\Repos\WPF_VegasHU\VegasHU\Images\001-football.png
         //C:\Users\nagy.kristof.robert\Source\Repos\WPF_VegasHU\VegasHU\Images\001-dart.png
         //C:\Users\nagy.kristof.robert\Source\Repos\WPF_VegasHU\VegasHU\Images\002-basketball.png
@@ -92,9 +88,9 @@ namespace VegasHU
                 oddsButton.Click += (s, e) =>
                 {
                     var placeBetPage = new PlaceBetPage(
-                        bettingEvent.EventName, 
+                        bettingEvent.EventName,
                         odds,
-                        result, 
+                        result,
                         Session.CurrentBettor.Balance,
                         bettingEvent.EventID
                     );
@@ -113,14 +109,15 @@ namespace VegasHU
                 mainStackPanel.Children.Add(eventCardBorder);
             }
         }
+
         private void LoadMoreEventsCards()
         {
             List<Event> events = GetEventsFromDatabase();
             Random random = new Random();
-            string result = random.Next(2) == 0 ? "Igen" : "Nem";
 
             foreach (var bettingEvent in events)
             {
+                string result = random.Next(2) == 0 ? "Igen" : "Nem";
                 Border eventCardBorder = new Border
                 {
                     Width = 800,
@@ -173,27 +170,32 @@ namespace VegasHU
                 switch (bettingEvent.Category)
                 {
                     case "Labdarugás":
-                        eventImage.Source = new BitmapImage(new Uri("C:\\Users\\nagy.kristof.robert\\Source\\Repos\\WPF_VegasHU\\VegasHU\\Images\\001-football.png"));
+                        eventImage.Source = new BitmapImage(new Uri("pack://application:,,,/Images/001-football.png"));
                         FootballEventsGrid.Children.Add(eventCardBorder);
                         break;
+
                     case "Darts":
-                        eventImage.Source = new BitmapImage(new Uri("C:\\Users\\nagy.kristof.robert\\Source\\Repos\\WPF_VegasHU\\VegasHU\\Images\\001-dart.png"));
+                        eventImage.Source = new BitmapImage(new Uri("pack://application:,,,/Images/001-dart.png"));
                         DartsEventsGrid.Children.Add(eventCardBorder);
                         break;
-                    case "Röplabda": 
-                        eventImage.Source = new BitmapImage(new Uri("C:\\Users\\nagy.kristof.robert\\Source\\Repos\\WPF_VegasHU\\VegasHU\\Images\\002-volleyball.png"));
+
+                    case "Röplabda":
+                        eventImage.Source = new BitmapImage(new Uri("pack://application:,,,/Images/002-volleyball.png"));
                         VolleyballEventsGrid.Children.Add(eventCardBorder);
                         break;
-                    case "Jégkorong": 
-                        eventImage.Source = new BitmapImage(new Uri("C:\\Users\\nagy.kristof.robert\\Source\\Repos\\WPF_VegasHU\\VegasHU\\Images\\003-hockey-sticks.png"));
+
+                    case "Jégkorong":
+                        eventImage.Source = new BitmapImage(new Uri("pack://application:,,,/Images/003-hockey-sticks.png"));
                         HockeyEventsGrid.Children.Add(eventCardBorder);
                         break;
+
                     case "Kosárlabda":
-                        eventImage.Source = new BitmapImage(new Uri("C:\\Users\\nagy.kristof.robert\\Source\\Repos\\WPF_VegasHU\\VegasHU\\Images\\002-basketball.png"));
+                        eventImage.Source = new BitmapImage(new Uri("pack://application:,,,/Images/002-basketball.png"));
                         BasketballEventsGrid.Children.Add(eventCardBorder);
                         break;
+
                     default:
-                        break; 
+                        break;
                 }
 
                 imageBorder.Child = eventImage;
@@ -255,21 +257,13 @@ namespace VegasHU
                 oddsButton.Content = oddsButtonStack;
 
                 eventCardStack.Children.Add(horizontalStack);
-                eventCardStack.Children.Add(imageBorder); 
+                eventCardStack.Children.Add(imageBorder);
                 eventCardStack.Children.Add(eventNameLabel);
                 eventCardStack.Children.Add(oddsButton);
 
                 eventCardBorder.Child = eventCardStack;
             }
         }
-
-
-
-
-
-
-
-
 
         private List<Event> GetEventsFromDatabase()
         {
@@ -299,6 +293,7 @@ namespace VegasHU
             }
             return events;
         }
+
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
@@ -310,6 +305,55 @@ namespace VegasHU
             Loginwindow.Show();
             this.Close();
         }
-       
+
+        private void btnHomePanel_Click(object sender, RoutedEventArgs e)
+        {
+            HomePanelShow();
+        }
+
+        private void HomePanelShow() {
+            HomePanel.Visibility = Visibility.Visible;
+            BetPanel.Visibility = Visibility.Collapsed;
+            MyBetsPanel.Visibility = Visibility.Collapsed;
+            ProfilePanel.Visibility = Visibility.Collapsed;
+        }
+
+        private void btnBetPanel_Click(object sender, RoutedEventArgs e)
+        {
+            BetPanelShow();
+        }
+        private void BetPanelShow()
+        {
+            HomePanel.Visibility = Visibility.Collapsed;
+            BetPanel.Visibility = Visibility.Visible;
+            MyBetsPanel.Visibility = Visibility.Collapsed;
+            ProfilePanel.Visibility = Visibility.Collapsed;
+        }
+
+        private void btnMyBetsPanel_Click(object sender, RoutedEventArgs e)
+        {
+            MyBetsPanelShow();
+        }
+
+        private void MyBetsPanelShow()
+        {
+            HomePanel.Visibility = Visibility.Collapsed;
+            BetPanel.Visibility = Visibility.Collapsed;
+            MyBetsPanel.Visibility = Visibility.Visible;
+            ProfilePanel.Visibility = Visibility.Collapsed;
+        }
+
+        private void btnProfilePanel_Click(object sender, RoutedEventArgs e)
+        {
+            ProfilePanelShow();
+        }
+
+        private void ProfilePanelShow()
+        {
+            HomePanel.Visibility = Visibility.Collapsed;
+            BetPanel.Visibility = Visibility.Collapsed;
+            MyBetsPanel.Visibility = Visibility.Collapsed;
+            ProfilePanel.Visibility = Visibility.Visible;
+        }
     }
 }
