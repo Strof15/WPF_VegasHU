@@ -22,29 +22,29 @@
                 <StackPanel>
                     <Image Source="Images/vegashu-img.png" />
                     <Button Margin="0" x:Name="btnHome" Style="{StaticResource MaterialDesignFlatButton}" Height="50" Width="200" materialDesign:ButtonAssist.CornerRadius="6" FontSize="18" FontWeight="Light" Foreground="White" Click="btnHomePanel_Click">
-                        <StackPanel Orientation="Horizontal" Height="40">
-                            <Image Source="Images/001-home.png" Width="35" Margin="5" />
+                        <StackPanel Orientation="Horizontal" Height="40" Width="200">
+                            <Image Source="Images/001-home.png" HorizontalAlignment="Left" Width="35" Margin="5" />
                             <TextBlock Margin="15,0,0,0" VerticalAlignment="Center" FontWeight="Light" FontSize="18">Kezdőlap</TextBlock>
                         </StackPanel>
                     </Button>
 
                     <Button Margin="0" x:Name="btnBetting" Style="{StaticResource MaterialDesignFlatButton}" Height="50" Width="200" materialDesign:ButtonAssist.CornerRadius="6" FontSize="18" FontWeight="Light" Foreground="White" Click="btnBetPanel_Click">
-                        <StackPanel Orientation="Horizontal" Height="40">
-                            <Image Source="Images/002-poker-chip.png" Width="35" Margin="5" />
+                        <StackPanel Orientation="Horizontal" Height="40" Width="200">
+                            <Image Source="Images/002-poker-chip.png" HorizontalAlignment="Left" Width="35" Margin="5" />
                             <TextBlock Margin="15,0,0,0" VerticalAlignment="Center" FontWeight="Light" FontSize="18">Sportfogadás</TextBlock>
                         </StackPanel>
                     </Button>
 
                     <Button Margin="0" x:Name="btnBets" Style="{StaticResource MaterialDesignFlatButton}" Height="50" Width="200" materialDesign:ButtonAssist.CornerRadius="6" FontSize="18" FontWeight="Light" Foreground="White" Click="btnMyBetsPanel_Click">
-                        <StackPanel Orientation="Horizontal" Height="40">
+                        <StackPanel Orientation="Horizontal" Height="40" Width="200">
                             <Image Source="Images/Ticket.png" Width="35" Margin="5" />
                             <TextBlock Margin="15,0,0,0" VerticalAlignment="Center" FontWeight="Light" FontSize="18">Fogadásaim</TextBlock>
                         </StackPanel>
                     </Button>
 
                     <Button Margin="0" x:Name="btnSupport" Style="{StaticResource MaterialDesignFlatButton}" Height="50" Width="200" materialDesign:ButtonAssist.CornerRadius="6" FontSize="18" FontWeight="Light" Foreground="White" Click="btnProfilePanel_Click">
-                        <StackPanel Orientation="Horizontal" Height="40">
-                            <Image Source="Images/user.png" Width="35" Margin="5" />
+                        <StackPanel Orientation="Horizontal" Height="40" Width="200">
+                            <Image Source="Images/user.png" Width="35" Margin="5"/>
                             <TextBlock Margin="15,0,0,0" VerticalAlignment="Center" FontWeight="Light" FontSize="18">Profilom</TextBlock>
                         </StackPanel>
                     </Button>
