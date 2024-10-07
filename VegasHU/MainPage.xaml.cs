@@ -307,15 +307,14 @@ namespace VegasHU
                     {
                         if (reader.HasRows && reader.Read())
                         {
-                            tbUserName.Text = reader["Username"].ToString();
-                            tbPassword.Text = reader["Password"].ToString();
+                            tbUsername.Text = reader["Username"].ToString();
 
                             tbEmail.Text = reader["Email"].ToString();
                             tbJoinDate.Text = reader["JoinDate"].ToString();
                         }
                         else
                         {
-                            tbUserName.Text = "";
+                            tbUsername.Text = "";
                             tbPassword.Text = "";
 
                             tbEmail.Text = "";
@@ -324,6 +323,44 @@ namespace VegasHU
                     }
                 }
             }
+        }
+        private void SaveUserDatas()
+        {
+            using (var sqlConn = new MySqlConnection(connectionString))
+            {
+                sqlConn.Open();
+
+                string query = @"
+                        UPDATE Bettors 
+                        SET username=@username, email=@mail
+                        WHERE BettorsID=@userId";
+
+                if (!string.IsNullOrWhiteSpace(tbPassword.Text))
+                {
+                    string hashedPassword = BCrypt.Net.BCrypt.HashPassword(tbPassword.Text);
+
+                    query = @"
+                        UPDATE Bettors 
+                        SET username=@username, email=@mail, password=@password
+                        WHERE BettorsID=@userId";
+                }
+
+                using (var sqlCommand = new MySqlCommand(query, sqlConn))
+                {
+                    sqlCommand.Parameters.AddWithValue("@username", tbUsername.Text);
+                    sqlCommand.Parameters.AddWithValue("@mail", tbEmail.Text);
+                    sqlCommand.Parameters.AddWithValue("@userId", Session.CurrentBettor.BettorsId);
+
+                    if (query.Contains("password"))
+                    {
+                        string hashedPassword = BCrypt.Net.BCrypt.HashPassword(tbPassword.Text);
+                        sqlCommand.Parameters.AddWithValue("@password", hashedPassword);
+                    }
+
+                    sqlCommand.ExecuteNonQuery();
+                }
+            }
+            MessageBox.Show("Adatait sikeresen frissítette!", "VegasHU System", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
@@ -341,7 +378,10 @@ namespace VegasHU
         {
             HomePanelShow();
         }
-
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            SaveUserDatas();
+        }
         private void HomePanelShow() {
             HomePanel.Visibility = Visibility.Visible;
             BetPanel.Visibility = Visibility.Collapsed;
