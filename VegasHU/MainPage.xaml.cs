@@ -17,14 +17,9 @@ namespace VegasHU
             InitializeComponent();
             LoadEventCards();
             LoadMoreEventsCards();
+            LoadUserData();
             HomePanelShow();
         }
-
-        //C:\Users\nagy.kristof.robert\Source\Repos\WPF_VegasHU\VegasHU\Images\001-football.png
-        //C:\Users\nagy.kristof.robert\Source\Repos\WPF_VegasHU\VegasHU\Images\001-dart.png
-        //C:\Users\nagy.kristof.robert\Source\Repos\WPF_VegasHU\VegasHU\Images\002-basketball.png
-        //C:\Users\nagy.kristof.robert\Source\Repos\WPF_VegasHU\VegasHU\Images\002-volleyball.png
-        //C:\Users\nagy.kristof.robert\Source\Repos\WPF_VegasHU\VegasHU\Images\003-hockey-sticks.png
 
         private void LoadEventCards()
         {
@@ -293,7 +288,43 @@ namespace VegasHU
             }
             return events;
         }
+        private void LoadUserData()
+        {
+            using (var sqlConn = new MySqlConnection(connectionString))
+            {
+                sqlConn.Open();
 
+                string query = @"
+                                SELECT Username, Password, Email, JoinDate
+                                FROM Bettors
+                                WHERE BettorsID=@userId";
+
+                using (var sqlCommand = new MySqlCommand(query, sqlConn))
+                {
+                    sqlCommand.Parameters.AddWithValue("@userId", Session.CurrentBettor.BettorsId);
+
+                    using (MySqlDataReader reader = sqlCommand.ExecuteReader())
+                    {
+                        if (reader.HasRows && reader.Read())
+                        {
+                            tbUserName.Text = reader["Username"].ToString();
+                            tbPassword.Text = reader["Password"].ToString();
+
+                            tbEmail.Text = reader["Email"].ToString();
+                            tbJoinDate.Text = reader["JoinDate"].ToString();
+                        }
+                        else
+                        {
+                            tbUserName.Text = "";
+                            tbPassword.Text = "";
+
+                            tbEmail.Text = "";
+                            tbJoinDate.Text = "";
+                        }
+                    }
+                }
+            }
+        }
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
