@@ -155,11 +155,46 @@
                     </Grid>
                 </Grid>
             </DockPanel>
-            <DockPanel x:Name="MyBetsPanel">
+            <DockPanel x:Name="MyBetsPanel" Visibility="Collapsed">
                 <Label Style="{DynamicResource LargeLabels}" Foreground="Black">mybets</Label>
             </DockPanel>
-            <DockPanel x:Name="ProfilePanel">
-                <Label Style="{DynamicResource LargeLabels}" Foreground="Black">profile</Label>
+            <DockPanel x:Name="ProfilePanel" Visibility="Collapsed">
+                <Grid Background="#323232" Height="700" Width="800">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="200"/>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="350"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Height="250" Grid.Row="3" Grid.ColumnSpan="2" Style="{DynamicResource ColoredStackPanelBorder}">
+                        <StackPanel Height="250" Style="{DynamicResource ColoredStackPanel}">
+                            <StackPanel Height="250">
+                                <TextBlock Margin="20 10 20 10" Height="50" Width="250" Text="Írd be a kívánt feltöltendő összeget" TextWrapping="WrapWithOverflow" TextAlignment="Center" Foreground="White" FontSize="19"/>
+                                <TextBox Margin="0 0 0 25" Foreground="#784599" x:Name="tbBalance" IsEnabled="False" Width="250" FontSize="18" materialDesign:HintAssist.Hint="felhasználónév" materialDesign:HintAssist.Foreground="#784599" materialDesign:TextFieldAssist.UnderlineBrush="#784599" Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                                <Button Grid.Row="2" Grid.ColumnSpan="2" x:Name="btnAddBalance" Style="{StaticResource MaterialDesignFlatButton}" materialDesign:ButtonAssist.CornerRadius="6" FontSize="18" Content="Egyenleg feltöltése" Background="#784599" FontWeight="Regular" Foreground="White"  Height="50" Width="200" Margin="0 0 0 50"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                    <StackPanel Grid.Row="1" Grid.Column="0" Margin="20,20,20,20">
+                        <TextBox Margin="0 0 0 25" Foreground="#784599" x:Name="tbUserName" IsEnabled="False" Width="300" FontSize="18" materialDesign:HintAssist.Hint="felhasználónév" materialDesign:HintAssist.Foreground="#784599" materialDesign:TextFieldAssist.UnderlineBrush="#784599" Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                        <TextBox Foreground="#784599" x:Name="tbEmail" IsEnabled="False" Width="300" FontSize="18" materialDesign:HintAssist.Hint="email" materialDesign:HintAssist.Foreground="#784599" materialDesign:TextFieldAssist.UnderlineBrush="#784599" Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Grid.Column="1" Margin="20,20,20,20">
+                        <TextBox Margin="0 0 0 25" Foreground="#784599" x:Name="tbPassword" IsEnabled="False" Width="300" FontSize="18" materialDesign:HintAssist.Hint="jelszó" materialDesign:HintAssist.Foreground="#784599" materialDesign:TextFieldAssist.UnderlineBrush="#784599" Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                        <TextBox Foreground="#784599" x:Name="tbJoinDate" IsEnabled="False" Width="300" FontSize="18" materialDesign:HintAssist.Hint="Csatlakozás dátuma" materialDesign:HintAssist.Foreground="#784599" materialDesign:TextFieldAssist.UnderlineBrush="#784599" Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                   
+                    </StackPanel>
+
+                    <Button Grid.Row="2" Grid.ColumnSpan="2" x:Name="btnSave" Style="{StaticResource MaterialDesignFlatButton}" materialDesign:ButtonAssist.CornerRadius="6" FontSize="18" Content="Mentés" Background="#784599" FontWeight="Regular" Foreground="White"  Height="50" Width="300" Margin="0 0 0 50" Click="btnCreateEvent_Click"/>
+                </Grid>
             </DockPanel>
         </DockPanel>
     </Grid>
