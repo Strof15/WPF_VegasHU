@@ -19,6 +19,7 @@ namespace VegasHU
             LoadMoreEventsCards();
             LoadUserData();
             HomePanelShow();
+            RefreshBalance();
         }
 
         private void LoadEventCards()
@@ -362,6 +363,59 @@ namespace VegasHU
             }
             MessageBox.Show("Adatait sikeresen frissítette!", "VegasHU System", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+        private void UpdateBalance()
+        {
+            using (var connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = "UPDATE Bettors SET Balance = Balance + @amount WHERE BettorsID = @bettorsid";
+
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@amount", double.Parse(tbBalance.Text));
+                    command.Parameters.AddWithValue("@bettorsid", Session.CurrentBettor.BettorsId);
+
+                    command.ExecuteNonQuery();
+
+                    Session.CurrentBettor.Balance += int.Parse(tbBalance.Text);
+                }
+            }
+            lblBalance.Text = $"Egyenleg: {Session.CurrentBettor.Balance} ft";
+        }
+        private void RefreshBalance()
+        {
+            using (var connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT Balance FROM Bettors WHERE BettorsID = @bettorsid";
+
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@bettorsid", Session.CurrentBettor.BettorsId);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            Session.CurrentBettor.Balance = reader.GetInt32("Balance");
+                            lblBalance.Text = $"Egyenleg: {Session.CurrentBettor.Balance} ft";
+                        }
+                    }
+                }
+            }
+        }
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            SaveUserDatas();
+        }
+
+        private void btnAddBalance_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateBalance();
+        }
+
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
@@ -377,10 +431,6 @@ namespace VegasHU
         private void btnHomePanel_Click(object sender, RoutedEventArgs e)
         {
             HomePanelShow();
-        }
-        private void btnSave_Click(object sender, RoutedEventArgs e)
-        {
-            SaveUserDatas();
         }
         private void HomePanelShow() {
             HomePanel.Visibility = Visibility.Visible;
@@ -400,7 +450,6 @@ namespace VegasHU
             MyBetsPanel.Visibility = Visibility.Collapsed;
             ProfilePanel.Visibility = Visibility.Collapsed;
         }
-
         private void btnMyBetsPanel_Click(object sender, RoutedEventArgs e)
         {
             MyBetsPanelShow();

@@ -19,7 +19,9 @@
     <None Remove="Images\003-hockey-sticks.png" />
     <None Remove="Images\003-list.png" />
     <None Remove="Images\003-support.png" />
+    <None Remove="Images\coins.png" />
     <None Remove="Images\exit.png" />
+    <None Remove="Images\ticket.png" />
     <None Remove="Images\user.png" />
     <None Remove="Images\vegashu-img.png" />
   </ItemGroup>
@@ -48,9 +50,17 @@
     <Resource Include="Images\002-sports.png" />
     <Resource Include="Images\002-volleyball.png" />
     <Resource Include="Images\003-hockey-sticks.png" />
-    <Resource Include="Images\003-list.png" />
+    <Resource Include="Images\003-list.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\003-support.png" />
+    <Resource Include="Images\coins.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\exit.png" />
+    <Resource Include="Images\ticket.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\user.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

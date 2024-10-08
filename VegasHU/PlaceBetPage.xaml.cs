@@ -33,7 +33,7 @@ namespace VegasHU
             this.balance = balance;
             this.eventId = eventId;
             LoadDatas(eventName, odds, result, balance);
-            RefreshBettorData();
+            RefreshBalance();
         }
 
         private void LoadDatas(string eventName, double odds, string result, double balance)
@@ -128,7 +128,7 @@ namespace VegasHU
 
                     if (rowsAffected > 0)
                     {
-                        UpdateBettorBalance(connection);
+                        UpdateBalance();
                         MessageBox.Show("A fogadás sikeres volt!", "VegasHU System", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     else
@@ -139,24 +139,26 @@ namespace VegasHU
             }
         }
 
-        private void UpdateBettorBalance(MySqlConnection connection)
+        private void UpdateBalance()
         {
-            string updateBalanceQuery = "UPDATE Bettors SET Balance = Balance - @amount WHERE BettorsID = @bettorsid";
-
-            using (var command = new MySqlCommand(updateBalanceQuery, connection))
+            using (var connection = new MySqlConnection(connectionString))
             {
-                command.Parameters.AddWithValue("@amount", double.Parse(tbAmount.Text));
-                command.Parameters.AddWithValue("@bettorsid", Session.CurrentBettor.BettorsId);
+                string query = "UPDATE Bettors SET Balance = Balance - @amount WHERE BettorsID = @bettorsid";
 
-                command.ExecuteNonQuery();
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@amount", double.Parse(tbAmount.Text));
+                    command.Parameters.AddWithValue("@bettorsid", Session.CurrentBettor.BettorsId);
 
-                Session.CurrentBettor.Balance -= int.Parse(tbAmount.Text);
+                    command.ExecuteNonQuery();
+
+                    Session.CurrentBettor.Balance -= int.Parse(tbAmount.Text);
+                }
             }
-
             lblBalance.Text = $"Egyenleg: {Session.CurrentBettor.Balance} ft";
         }
 
-        private void RefreshBettorData()
+        private void RefreshBalance()
         {
             using (var connection = new MySqlConnection(connectionString))
             {
