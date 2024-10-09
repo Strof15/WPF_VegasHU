@@ -68,14 +68,14 @@
 
             <DockPanel x:Name="HomePanel" Visibility="Collapsed">
                 <Grid Background="#323232">
-                    
+
                 </Grid>
             </DockPanel>
 
 
             <DockPanel x:Name="BetPanel" Visibility="Collapsed">
                 <Grid Background="#323232">
-                    
+
 
                     <TextBlock Text="Sportfogadás" FontSize="32" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,60,0,0" Foreground="White" />
 
@@ -161,8 +161,65 @@
                     </Grid>
                 </Grid>
             </DockPanel>
-            <DockPanel x:Name="MyBetsPanel" Visibility="Collapsed">
-                <Label Style="{DynamicResource LargeLabels}" Foreground="Black">mybets</Label>
+            <DockPanel x:Name="MyBetsPanel" Visibility="visible">
+                <StackPanel>
+                    <Grid Background="#323232" Margin="20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <!-- Az első sor automatikus magasságú -->
+                            <RowDefinition Height="*"/>
+                            <!-- A második sor a maradék helyet foglalja el -->
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <!-- Egy oszlop -->
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Az első sor a "Fogadások" felirat és a ComboBox -->
+                        <StackPanel Grid.Row="0" Margin="20">
+                            <TextBlock Text="Fogadások" FontSize="32" VerticalAlignment="Top" Foreground="White" />
+                            <ComboBox x:Name="statusComboBox" 
+                      VerticalAlignment="Top" Margin="0,10,0,0" 
+                      HorizontalAlignment="Left"
+                      Style="{StaticResource MaterialDesignOutlinedComboBox}" 
+                      Width="200" 
+                      SelectionChanged="StatusComboBox_SelectionChanged">
+                                <ComboBoxItem Content="Vesztett" Foreground="Red" />
+                                <ComboBoxItem Content="Nyert" Foreground="Green" />
+                                <ComboBoxItem Content="Nyitott" Foreground="#784599" />
+                            </ComboBox>
+                        </StackPanel>
+
+                        <!-- A második sor a ScrollViewer és a UniformGrid -->
+                        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <UniformGrid Background="#323232" Rows="2">
+                                <Border Height="250"  Style="{DynamicResource ColoredStackPanelBorder}" VerticalAlignment="Top">
+                                    <StackPanel Style="{DynamicResource ColoredStackPanel}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Style="{DynamicResource SmallLabels}" HorizontalAlignment="Left" Content="Kosárlabda" Width="80"/>
+                                            <Label Style="{DynamicResource SmallLabels}" Content="10.11" Margin="230,0,0,0"/>
+                                        </StackPanel>
+                                        <TextBlock Style="{DynamicResource MediumLabelsText}" HorizontalAlignment="Center" Text="LA Lakers 190.5 pont felett dob? LA Lakers 190.5 pont felett dob?"/>
+                                            <Label Style="{DynamicResource SmallLabels}" HorizontalAlignment="Center" Content="Debrecen"/>
+                                            <Label Style="{DynamicResource SmallLabels}" HorizontalAlignment="Center" Content="vesztett" Foreground="Red"/>
+                                        <Label Style="{DynamicResource SmallLabels}" HorizontalAlignment="Center" Content="Nyeremény: 11.000ft"/>
+                                        <Border Width="70" Height="48" BorderThickness="2" BorderBrush="#784599" Background="#784599" CornerRadius="5">
+                                        <StackPanel>
+                                            <Label Style="{DynamicResource SmallLabels}" HorizontalAlignment="Center" Content="2.2" Height="27" FontSize="15" Margin="0" FontWeight="Bold"/>
+                                            <Label Style="{DynamicResource  SmallLabels}" HorizontalAlignment="Center" Content="Nem" Height="21" FontSize="8"/>
+                                        </StackPanel>
+                                        </Border>
+                                    </StackPanel>
+                                </Border>
+                            </UniformGrid>
+                        </ScrollViewer>
+                    </Grid>
+                </StackPanel>
+
+
+
+
             </DockPanel>
             <DockPanel x:Name="ProfilePanel" Visibility="Collapsed">
                 <Grid Background="#323232" Height="700" Width="800">
@@ -187,7 +244,7 @@
                         <TextBox Foreground="#784599" x:Name="tbJoinDate" IsEnabled="False" Width="300" FontSize="18" materialDesign:HintAssist.Hint="Csatlakozás dátuma" materialDesign:HintAssist.Foreground="#784599" materialDesign:TextFieldAssist.UnderlineBrush="#784599" Style="{StaticResource MaterialDesignOutlinedTextBox}" />
                     </StackPanel>
                     <Button Grid.Row="2" Grid.ColumnSpan="2" x:Name="btnSave" Style="{StaticResource MaterialDesignFlatButton}" materialDesign:ButtonAssist.CornerRadius="6" FontSize="18" Content="Mentés" Background="#784599" FontWeight="Regular" Foreground="White"  Height="50" Width="300" Margin="0 0 0 50" Click="btnSave_Click"/>
-                    
+
                     <Border Height="250" Grid.Row="3" Grid.ColumnSpan="2" Style="{DynamicResource ColoredStackPanelBorder}">
                         <StackPanel Height="250" Style="{DynamicResource ColoredStackPanel}">
                             <StackPanel Height="250">
