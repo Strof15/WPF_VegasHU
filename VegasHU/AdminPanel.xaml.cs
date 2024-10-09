@@ -121,6 +121,110 @@ namespace VegasHU
             }
             catch (Exception ex) { ShowErrorMessage(ex.Message); }
         }
+        private void LoadUsers()
+        {
+            try
+            {
+                List<Bettors> bettors = new List<Bettors>();
+
+                using (var connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string query = @"SELECT BettorsID, Username, Email, Balance, IsActive FROM Bettors";
+
+                    using (var command = new MySqlCommand(query, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                bettors.Add(new Bettors
+                                {
+                                    BettorsId = reader.GetInt32(0),
+                                    Username = reader.GetString(1),
+                                    Email = reader.GetString(2),
+                                    Balance = reader.GetInt32(3),
+                                    IsActive = reader.GetBoolean(4),
+                                });
+                            }
+                        }
+                    }
+                }
+
+                dgUsers.ItemsSource = bettors;
+            }
+            catch (Exception ex)
+            {
+                ShowErrorMessage(ex.Message);
+            }
+        }
+        private void btnAddUser_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var newBettor = new Bettors
+                {
+                    Username = txtUsername.Text,
+                    Email = txtEmail.Text,
+                    Balance = int.Parse(txtBalance.Text),
+                    IsActive = chkIsActive.IsChecked ?? false
+                };
+
+                using (var connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string query = "INSERT INTO Bettors (Username, Email, Balance, IsActive) VALUES (@Username, @Email, @Balance, @IsActive)";
+
+                    using (var command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Username", newBettor.Username);
+                        command.Parameters.AddWithValue("@Email", newBettor.Email);
+                        command.Parameters.AddWithValue("@Balance", newBettor.Balance);
+                        command.Parameters.AddWithValue("@IsActive", newBettor.IsActive);
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+
+                LoadUsers(); // Refresh the DataGrid
+            }
+            catch (Exception ex)
+            {
+                ShowErrorMessage(ex.Message);
+            }
+        }
+
+        private void btnDeleteUser_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgUsers.SelectedItem is Bettors selectedBettor)
+            {
+                try
+                {
+                    using (var connection = new MySqlConnection(connectionString))
+                    {
+                        connection.Open();
+                        string query = "DELETE FROM Bettors WHERE BettorsID = @BettorsID";
+
+                        using (var command = new MySqlCommand(query, connection))
+                        {
+                            command.Parameters.AddWithValue("@BettorsID", selectedBettor.BettorsId);
+                            command.ExecuteNonQuery();
+                        }
+                    }
+
+                    LoadUsers(); // Refresh the DataGrid
+                }
+                catch (Exception ex)
+                {
+                    ShowErrorMessage(ex.Message);
+                }
+            }
+            else
+            {
+                ShowErrorMessage("Please select a user to delete.");
+            }
+        }
         private void ShowErrorMessage(string message)
         {
             MessageBox.Show(message, "VegasHU System", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -144,6 +248,7 @@ namespace VegasHU
         private void btnUsers_Click(object sender, RoutedEventArgs e)
         {
             UsersPanelShow();
+            LoadUsers();
         }
         private void NewEventPanelShow()
         {
