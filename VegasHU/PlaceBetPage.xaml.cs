@@ -143,6 +143,7 @@ namespace VegasHU
         {
             using (var connection = new MySqlConnection(connectionString))
             {
+                connection.Open();
                 string query = "UPDATE Bettors SET Balance = Balance - @amount WHERE BettorsID = @bettorsid";
 
                 using (var command = new MySqlCommand(query, connection))

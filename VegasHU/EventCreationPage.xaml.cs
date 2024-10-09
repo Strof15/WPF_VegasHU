@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using Mysqlx.Crud;
+using VegasHU.Models;
 namespace VegasHU
 {
     public partial class EventCreationPage : Window
@@ -85,7 +88,41 @@ namespace VegasHU
                 }
             }
         }
+        private void LoadEvents()
+        {
+            try
+            {
+                List<Event> events = new List<Event>();
 
+                using (var connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string query = @"SELECT EventID, EventName, EventDate, Category, Location FROM events";
+
+                    using (var command = new MySqlCommand(query, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                events.Add(new Event
+                                {
+                                    EventID = reader.GetInt32(0),
+                                    EventName = reader.GetString(1),
+                                    EventDate = reader.GetDateTime(2),
+                                    Category = reader.GetString(3),
+                                    Location = reader.GetString(4),
+                                });
+                            }
+                        }
+                    }
+                }
+
+                dgEvents.ItemsSource = events;
+            }
+            catch (Exception ex) { ShowErrorMessage(ex.Message); }
+        }
         private void ShowErrorMessage(string message)
         {
             MessageBox.Show(message, "VegasHU System", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -98,6 +135,7 @@ namespace VegasHU
         private void btnListEvents_Click(object sender, RoutedEventArgs e)
         {
             EventListPanelShow();
+            LoadEvents();
         }
 
         private void btnCreateEvents_Click(object sender, RoutedEventArgs e)
