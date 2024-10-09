@@ -52,10 +52,18 @@
                     </Grid.ColumnDefinitions>
                     <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges" Margin="5" StaysOpen="False" Height="25" Grid.Column="1" Width="32" HorizontalAlignment="Right" VerticalAlignment="Top">
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                            <Button ToolTip="Probléma a bejelentkezéssel?" Content="Segítség"></Button>
                             <Button ToolTip="Alkalmazás bezárása" Content="Bezárás" Click="btnExit_Click"></Button>
                         </StackPanel>
                     </materialDesign:PopupBox>
+                    <DataGrid x:Name="dgEvents" Grid.Row="1" Grid.ColumnSpan="2" AutoGenerateColumns="False" CanUserAddRows="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Azonosító" Binding="{Binding EventID}" Width="150"/>
+                            <DataGridTextColumn Header="Név" Binding="{Binding EventName}" Width="150"/>
+                            <DataGridTextColumn Header="Dátum" Binding="{Binding EventDate}" Width="150"/>
+                            <DataGridTextColumn Header="Kategória" Binding="{Binding Category}" Width="150"/>
+                            <DataGridTextColumn Header="Helyszín" Binding="{Binding Location}" Width="150"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
             </DockPanel>
 
