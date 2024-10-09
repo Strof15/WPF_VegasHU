@@ -1,4 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
+using System.Net.Mail;
+using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -363,6 +365,7 @@ namespace VegasHU
             }
             MessageBox.Show("Adatait sikeresen frissítette!", "VegasHU System", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+
         private void UpdateBalance()
         {
             using (var connection = new MySqlConnection(connectionString))
@@ -381,15 +384,17 @@ namespace VegasHU
                     Session.CurrentBettor.Balance += int.Parse(tbBalance.Text);
                 }
             }
+
             lblBalance.Text = $"Egyenleg: {Session.CurrentBettor.Balance} ft";
         }
+
         private void RefreshBalance()
         {
             using (var connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
 
-                string query = "SELECT Balance FROM Bettors WHERE BettorsID = @bettorsid";
+                string query = "SELECT Balance, Email FROM Bettors WHERE BettorsID = @bettorsid"; // Email lekérdezés is
 
                 using (var command = new MySqlCommand(query, connection))
                 {
@@ -400,6 +405,7 @@ namespace VegasHU
                         if (reader.Read())
                         {
                             Session.CurrentBettor.Balance = reader.GetInt32("Balance");
+                            Session.CurrentBettor.Email = reader.GetString("Email"); // E-mail cím tárolása
                             lblBalance.Text = $"Egyenleg: {Session.CurrentBettor.Balance} ft";
                         }
                     }
@@ -475,5 +481,20 @@ namespace VegasHU
             MyBetsPanel.Visibility = Visibility.Collapsed;
             ProfilePanel.Visibility = Visibility.Visible;
         }
+
+        private void StatusComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Ellenőrizzük, hogy van kiválasztott elem
+            if (statusComboBox.SelectedItem is ComboBoxItem selectedItem)
+            {
+                // Kiválasztott elem színének beállítása
+                var selectedColor = (selectedItem.Foreground as SolidColorBrush)?.Color ?? Colors.Black;
+
+                // A ComboBox háttérszínének megváltoztatása
+                statusComboBox.Foreground = new SolidColorBrush(selectedColor);
+            }
+        }
+
+
     }
 }
