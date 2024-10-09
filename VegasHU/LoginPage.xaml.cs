@@ -71,13 +71,13 @@ namespace VegasHU
                                         Session.CurrentBettor = loggedInBettor;
                                         sqlConn.Close();
 
-                                        if (username == "Strof")
+                                        if (username.ToLower() == "strof")
                                         {
                                             new EventCreationPage().Show();
                                         }
-                                        else if (username == "Admin")
+                                        else if (username.ToLower() == "admin")
                                         {
-                                            new EventCreationPage().Show();
+                                            new AdminPanel().Show();
                                         }
                                         else
                                         {

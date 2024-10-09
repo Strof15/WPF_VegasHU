@@ -1,6 +1,6 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,16 +12,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using MySql.Data;
-using MySql.Data.MySqlClient;
-using Mysqlx.Crud;
 using VegasHU.Models;
+
 namespace VegasHU
 {
-    public partial class EventCreationPage : Window
+    public partial class AdminPanel : Window
     {
         private readonly string connectionString = "Server=localhost;Database=vegashu;Uid=root;Pwd=;";
-        public EventCreationPage()
+        public AdminPanel()
         {
             InitializeComponent();
             NewEventPanelShow();
@@ -143,17 +141,29 @@ namespace VegasHU
             NewEventPanelShow();
         }
 
-        private void NewEventPanelShow() {
+        private void btnUsers_Click(object sender, RoutedEventArgs e)
+        {
+            UsersPanelShow();
+        }
+        private void NewEventPanelShow()
+        {
             NewEventPanel.Visibility = Visibility.Visible;
             EventListPanel.Visibility = Visibility.Collapsed;
+            UsersListPanel.Visibility = Visibility.Collapsed;
         }
 
         private void EventListPanelShow()
         {
             NewEventPanel.Visibility = Visibility.Collapsed;
             EventListPanel.Visibility = Visibility.Visible;
+            UsersListPanel.Visibility = Visibility.Collapsed;
         }
-
+        private void UsersPanelShow()
+        {
+            NewEventPanel.Visibility = Visibility.Collapsed;
+            EventListPanel.Visibility = Visibility.Collapsed;
+            UsersListPanel.Visibility = Visibility.Visible;
+        }
         private void tbEventName_TextChanged(object sender, TextChangedEventArgs e)
         {
             UpdateLabelContent(lblName, tbEventName.Text);
@@ -177,7 +187,7 @@ namespace VegasHU
             }
             else
             {
-                UpdateLabelContent(lblDate, ""); 
+                UpdateLabelContent(lblDate, "");
             }
         }
         private void UpdateLabelContent(Label label, string content)

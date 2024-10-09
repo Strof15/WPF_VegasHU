@@ -21,6 +21,7 @@
     <None Remove="Images\003-support.png" />
     <None Remove="Images\coins.png" />
     <None Remove="Images\exit.png" />
+    <None Remove="Images\group.png" />
     <None Remove="Images\ticket.png" />
     <None Remove="Images\user.png" />
     <None Remove="Images\vegashu-img.png" />
@@ -58,6 +59,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\exit.png" />
+    <Resource Include="Images\group.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\ticket.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
