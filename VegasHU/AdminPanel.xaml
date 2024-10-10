@@ -136,7 +136,8 @@
                 <Grid Background="#323232" Height="600" Width="800">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
-                        <RowDefinition Height="550"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
@@ -148,8 +149,7 @@
                             <Button ToolTip="Alkalmazás bezárása" Content="Bezárás" Click="btnExit_Click"></Button>
                         </StackPanel>
                     </materialDesign:PopupBox>
-                    <StackPanel Margin="15" Grid.Row="1" Grid.ColumnSpan="2">
-                        <DataGrid Background="#3A3A3A" Foreground="White" Margin="15" x:Name="dgUsers" Grid.Row="1" Grid.ColumnSpan="2" AutoGenerateColumns="False" CanUserAddRows="False">
+                        <DataGrid IsReadOnly="True" Background="#3A3A3A" SelectionChanged="dgUsers_SelectionChanged" Foreground="White" Margin="15" x:Name="dgUsers" Grid.Row="1" Grid.ColumnSpan="2" AutoGenerateColumns="False" CanUserAddRows="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Bettors ID" Binding="{Binding BettorsID}" Width="100"/>
                                 <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="150"/>
@@ -158,14 +158,26 @@
                                 <DataGridTextColumn Header="Is Active" Binding="{Binding IsActive}" Width="100"/>
                             </DataGrid.Columns>
                         </DataGrid>
-
-                        <TextBox Foreground="#784599" Width="300" FontSize="18"  x:Name="txtUsername" Margin="5" materialDesign:HintAssist.Hint="felhasználónév" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
-                        <TextBox Foreground="#784599" Width="300" FontSize="18"  x:Name="txtEmail" Margin="5" materialDesign:HintAssist.Hint="email" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
-                        <TextBox Foreground="#784599" Width="300" FontSize="18"  x:Name="txtBalance" Margin="5" materialDesign:HintAssist.Hint="egyenleg" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
-                        <CheckBox Foreground="#784599" Width="300" FontSize="18"  x:Name="chkIsActive" Content="Aktív" Margin="5"/>
-
-                        <Button Background="#784599" FontWeight="Regular" Foreground="White" Height="50" Width="300" Margin="0 0 0 15" x:Name="btnAddUser" Content="Felhasználó hozzáadása" Click="btnAddUser_Click" Style="{StaticResource MaterialDesignFlatButton}"/>
-                        <Button Background="#784599" FontWeight="Regular" Foreground="White" Height="50" Width="300" x:Name="btnDeleteUser" Content="Felhasználó törlése" Click="btnDeleteUser_Click" Style="{StaticResource MaterialDesignFlatButton}"/>
+                        <StackPanel Grid.Row="2" Grid.ColumnSpan="2">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBox Foreground="#784599" Width="300" FontSize="18"  x:Name="tbUsername" Margin="5" materialDesign:HintAssist.Hint="felhasználónév" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                                <TextBox Foreground="#784599" Width="300" FontSize="18"  x:Name="tbEmail" Margin="5" materialDesign:HintAssist.Hint="email" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <TextBox Foreground="#784599" Width="300" FontSize="18"  x:Name="tbPassword" Margin="5" materialDesign:HintAssist.Hint="jelszó" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                                <TextBox Foreground="#784599" Width="300" FontSize="18"  x:Name="tbBalance" Margin="5" materialDesign:HintAssist.Hint="egyenleg" Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                            </StackPanel>
+                        </Grid>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Button Background="#784599" FontWeight="Regular" Foreground="White" Height="50" Width="100" Margin="5" x:Name="btnAddUser" Content="Hozzáadás" Click="btnAddUser_Click" Style="{StaticResource MaterialDesignFlatButton}"/>
+                            <Button Background="#784599" FontWeight="Regular" Foreground="White" Height="50" Width="100" Margin="5" x:Name="btnModifyUser" Content="Módosítás" Click="btnModifyUser_Click" Style="{StaticResource MaterialDesignFlatButton}"/>
+                            <Button Background="#784599" FontWeight="Regular" Foreground="White" Height="50" Width="100" Margin="5" x:Name="btnDeleteUser" Content="Törlés" Click="btnDeleteUser_Click" Style="{StaticResource MaterialDesignFlatButton}"/>
+                        </StackPanel>
                     </StackPanel>
                 </Grid>
             </DockPanel>

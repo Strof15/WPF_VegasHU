@@ -7,6 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using VegasHU.Models;
 using static VegasHU.LoginPage;
+using System.Windows.Controls.Primitives;
 
 namespace VegasHU
 {
@@ -85,7 +86,7 @@ namespace VegasHU
                 };
                 oddsButton.Click += (s, e) =>
                 {
-                    var placeBetPage = new PlaceBetPage(
+                    var placeBetPage = new PlaceBetPage(this,
                         bettingEvent.EventName,
                         odds,
                         result,
@@ -241,6 +242,7 @@ namespace VegasHU
                 oddsButton.Click += (s, e) =>
                 {
                     var placeBetPage = new PlaceBetPage(
+                        this,
                         bettingEvent.EventName,
                         odds,
                         result,
@@ -291,6 +293,149 @@ namespace VegasHU
             }
             return events;
         }
+        private List<Bets> GetBetsForCurrentBettor(int bettorId)
+        {
+            List<Bets> betsList = new List<Bets>();
+
+            using (var connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"SELECT b.BetsID, b.BetDate, b.Odds, b.Amount, b.Status, e.EventID, e.EventName, e.EventDate, e.Category, e.Location
+                                FROM Bets b 
+                                JOIN Events e ON b.EventID = e.EventID 
+                                WHERE b.BettorsID = @bettorsID";
+
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@bettorsID", bettorId);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Bets bet = new Bets
+                            {
+                                BetsID = reader.GetInt32("BetsID"),
+                                BetDate = reader.GetDateTime("BetDate"),
+                                Odds = reader.GetFloat("Odds"),
+                                Amount = reader.GetInt32("Amount"),
+                                Status = reader.GetBoolean("Status"),
+
+                                Event = new Event
+                                {
+                                    EventID = reader.GetInt32("EventID"),
+                                    EventName = reader.GetString("EventName"),
+                                    EventDate = reader.GetDateTime("EventDate"),
+                                    Category = reader.GetString("Category"),
+                                    Location = reader.GetString("Location")
+                                }
+                            };
+                            betsList.Add(bet);
+                        }
+                    }
+                }
+            }
+            return betsList;
+        }
+        private void LoadBets(int bettorId)
+        {
+            List<Bets> bets = GetBetsForCurrentBettor(bettorId);
+            UniformGrid betGrid = new UniformGrid
+            {
+                Rows = bets.Count / 2,
+                Background = new SolidColorBrush(Color.FromRgb(50, 50, 50))
+            };
+
+            foreach (var bet in bets)
+            {
+                Border betCard = new Border
+                {
+                    Height = 250,
+                    Style = (Style)FindResource("ColoredStackPanelBorder"),
+                    VerticalAlignment = VerticalAlignment.Top
+                };
+
+                StackPanel stackPanel = new StackPanel();
+
+                StackPanel eventInfoPanel = new StackPanel { Orientation = Orientation.Horizontal };
+                eventInfoPanel.Children.Add(new Label
+                {
+                    Content = bet.Event.Category,
+                    Style = (Style)FindResource("SmallLabels"),
+                    Width = 80
+                });
+                eventInfoPanel.Children.Add(new Label
+                {
+                    Content = bet.BetDate.ToString("MM.dd"),
+                    Style = (Style)FindResource("SmallLabels"),
+                    Margin = new Thickness(230, 0, 0, 0)
+                });
+                stackPanel.Children.Add(eventInfoPanel);
+
+                stackPanel.Children.Add(new TextBlock
+                {
+                    Text = bet.Event.EventName,
+                    Style = (Style)FindResource("MediumLabelsText"),
+                    HorizontalAlignment = HorizontalAlignment.Center
+                });
+
+                stackPanel.Children.Add(new Label
+                {
+                    Content = bet.Event.Location,
+                    Style = (Style)FindResource("SmallLabels"),
+                    HorizontalAlignment = HorizontalAlignment.Center
+                });
+
+                stackPanel.Children.Add(new Label
+                {
+                    Content = bet.Status ? "Nyert" : "Vesztett",
+                    Style = (Style)FindResource("SmallLabels"),
+                    Foreground = bet.Status ? Brushes.Green : Brushes.Red,
+                    HorizontalAlignment = HorizontalAlignment.Center
+                });
+
+                stackPanel.Children.Add(new Label
+                {
+                    Content = $"Nyeremény: {(bet.Status ? (bet.Odds * bet.Amount).ToString("N0") : "0")} ft",
+                    Style = (Style)FindResource("SmallLabels"),
+                    HorizontalAlignment = HorizontalAlignment.Center
+                });
+
+                Border oddsBorder = new Border
+                {
+                    Width = 70,
+                    Height = 48,
+                    BorderThickness = new Thickness(2),
+                    BorderBrush = new SolidColorBrush(Color.FromRgb(120, 69, 153)),
+                    Background = new SolidColorBrush(Color.FromRgb(120, 69, 153)),
+                    CornerRadius = new CornerRadius(5)
+                };
+
+                StackPanel oddsPanel = new StackPanel();
+                oddsPanel.Children.Add(new Label
+                {
+                    Content = bet.Odds.ToString("N1"),
+                    FontSize = 15,
+                    FontWeight = FontWeights.Bold,
+                    HorizontalAlignment = HorizontalAlignment.Center
+                });
+                oddsPanel.Children.Add(new Label
+                {
+                    Content = "Nem", 
+                    FontSize = 8,
+                    HorizontalAlignment = HorizontalAlignment.Center
+                });
+                oddsBorder.Child = oddsPanel;
+                stackPanel.Children.Add(oddsBorder);
+
+                betCard.Child = stackPanel;
+                betGrid.Children.Add(betCard);
+            }
+
+            BetsStackPanel.Children.Add(betGrid);
+        }
+
         private void LoadUserData()
         {
             using (var sqlConn = new MySqlConnection(connectionString))
@@ -394,7 +539,7 @@ namespace VegasHU
             {
                 connection.Open();
 
-                string query = "SELECT Balance, Email FROM Bettors WHERE BettorsID = @bettorsid"; // Email lekérdezés is
+                string query = "SELECT Balance FROM Bettors WHERE BettorsID = @bettorsid";
 
                 using (var command = new MySqlCommand(query, connection))
                 {
@@ -405,7 +550,6 @@ namespace VegasHU
                         if (reader.Read())
                         {
                             Session.CurrentBettor.Balance = reader.GetInt32("Balance");
-                            Session.CurrentBettor.Email = reader.GetString("Email"); // E-mail cím tárolása
                             lblBalance.Text = $"Egyenleg: {Session.CurrentBettor.Balance} ft";
                         }
                     }
@@ -461,6 +605,7 @@ namespace VegasHU
         private void btnMyBetsPanel_Click(object sender, RoutedEventArgs e)
         {
             MyBetsPanelShow();
+            LoadBets(Session.CurrentBettor.BettorsId);
         }
 
         private void MyBetsPanelShow()
@@ -488,13 +633,10 @@ namespace VegasHU
 
         private void StatusComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Ellenőrizzük, hogy van kiválasztott elem
             if (statusComboBox.SelectedItem is ComboBoxItem selectedItem)
             {
-                // Kiválasztott elem színének beállítása
                 var selectedColor = (selectedItem.Foreground as SolidColorBrush)?.Color ?? Colors.Black;
 
-                // A ComboBox háttérszínének megváltoztatása
                 statusComboBox.Foreground = new SolidColorBrush(selectedColor);
             }
         }

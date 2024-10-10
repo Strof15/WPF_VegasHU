@@ -212,7 +212,7 @@
                     </Grid>
                 </Grid>
             </DockPanel>
-            <DockPanel x:Name="MyBetsPanel" Visibility="Collapsed">
+            <DockPanel x:Name="MyBetsPanel" Visibility="Visible">
                 <StackPanel>
                     <Grid Background="#323232" Margin="20">
                         <Grid.RowDefinitions>
@@ -220,53 +220,26 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
+                        <!-- Header and ComboBox -->
                         <StackPanel Grid.Row="0" Margin="20">
                             <TextBlock Text="Fogadások" FontSize="32" VerticalAlignment="Top" Foreground="White" />
-                            <ComboBox x:Name="statusComboBox" 
-                      VerticalAlignment="Top" Margin="0,10,0,0" 
-                      HorizontalAlignment="Left"
-                      Style="{StaticResource MaterialDesignOutlinedComboBox}" 
-                      Width="200" 
-                      SelectionChanged="StatusComboBox_SelectionChanged">
+                            <ComboBox x:Name="statusComboBox" VerticalAlignment="Top" Margin="0,10,0,0" 
+                          HorizontalAlignment="Left" Width="200" 
+                          SelectionChanged="StatusComboBox_SelectionChanged">
                                 <ComboBoxItem Content="Vesztett" Foreground="Red" />
                                 <ComboBoxItem Content="Nyert" Foreground="Green" />
                                 <ComboBoxItem Content="Nyitott" Foreground="#784599" />
                             </ComboBox>
                         </StackPanel>
 
+                        <!-- Bets Section -->
                         <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                            <UniformGrid Background="#323232" Rows="2">
-                                <Border Height="250"  Style="{DynamicResource ColoredStackPanelBorder}" VerticalAlignment="Top">
-                                    <StackPanel Style="{DynamicResource ColoredStackPanel}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <Label Style="{DynamicResource SmallLabels}" HorizontalAlignment="Left" Content="Kosárlabda" Width="80"/>
-                                            <Label Style="{DynamicResource SmallLabels}" Content="10.11" Margin="230,0,0,0"/>
-                                        </StackPanel>
-                                        <TextBlock Style="{DynamicResource MediumLabelsText}" HorizontalAlignment="Center" Text="LA Lakers 190.5 pont felett dob? LA Lakers 190.5 pont felett dob?"/>
-                                        <Label Style="{DynamicResource SmallLabels}" HorizontalAlignment="Center" Content="Debrecen"/>
-                                        <Label Style="{DynamicResource SmallLabels}" HorizontalAlignment="Center" Content="vesztett" Foreground="Red"/>
-                                        <Label Style="{DynamicResource SmallLabels}" HorizontalAlignment="Center" Content="Nyeremény: 11.000ft"/>
-                                        <Border Width="70" Height="48" BorderThickness="2" BorderBrush="#784599" Background="#784599" CornerRadius="5">
-                                            <StackPanel>
-                                                <Label Style="{DynamicResource SmallLabels}" HorizontalAlignment="Center" Content="2.2" Height="27" FontSize="15" Margin="0" FontWeight="Bold"/>
-                                                <Label Style="{DynamicResource  SmallLabels}" HorizontalAlignment="Center" Content="Nem" Height="21" FontSize="8"/>
-                                            </StackPanel>
-                                        </Border>
-                                    </StackPanel>
-                                </Border>
-                            </UniformGrid>
+                            <UniformGrid Rows="1" x:Name="BetsStackPanel" Margin="10" />
                         </ScrollViewer>
                     </Grid>
                 </StackPanel>
-
-
-
-
             </DockPanel>
+
             <DockPanel x:Name="ProfilePanel" Visibility="Collapsed">
                 <Grid Background="#323232" Height="700" Width="800">
                     <Grid.RowDefinitions>

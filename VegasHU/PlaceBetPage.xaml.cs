@@ -25,10 +25,12 @@ namespace VegasHU
         private double balance;
         private int eventId;
         private readonly string connectionString = "Server=localhost;Database=vegashu;Uid=root;Pwd=;";
+        private MainPage mainPage;
 
-        public PlaceBetPage(string eventName, double odds, string result, double balance, int eventId)
+        public PlaceBetPage(MainPage mainPage, string eventName, double odds, string result, double balance, int eventId)
         {
             InitializeComponent();
+            this.mainPage = mainPage;
             this.odds = odds;
             this.balance = balance;
             this.eventId = eventId;
@@ -157,6 +159,7 @@ namespace VegasHU
                 }
             }
             lblBalance.Text = $"Egyenleg: {Session.CurrentBettor.Balance} ft";
+            mainPage.lblBalance.Text = $"Egyenleg: {Session.CurrentBettor.Balance} ft";
         }
 
         private void RefreshBalance()

@@ -145,7 +145,7 @@ namespace VegasHU
                                     Username = reader.GetString(1),
                                     Email = reader.GetString(2),
                                     Balance = reader.GetInt32(3),
-                                    IsActive = reader.GetBoolean(4),
+                                    IsActive = reader.GetInt32(4),
                                 });
                             }
                         }
@@ -159,39 +159,104 @@ namespace VegasHU
                 ShowErrorMessage(ex.Message);
             }
         }
+        private void dgUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (dgUsers.SelectedItem is Bettors selectedBettor)
+            {
+                tbUsername.Text = selectedBettor.Username;
+                tbEmail.Text = selectedBettor.Email;
+                tbBalance.Text = selectedBettor.Balance.ToString();
+                tbPassword.Clear();
+            }
+        }
+
         private void btnAddUser_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (!string.IsNullOrEmpty(tbUsername.Text) && !string.IsNullOrEmpty(tbEmail.Text) && !string.IsNullOrEmpty(tbPassword.Text) && !string.IsNullOrEmpty(tbBalance.Text))
             {
-                var newBettor = new Bettors
+                try
                 {
-                    Username = txtUsername.Text,
-                    Email = txtEmail.Text,
-                    Balance = int.Parse(txtBalance.Text),
-                    IsActive = chkIsActive.IsChecked ?? false
-                };
-
-                using (var connection = new MySqlConnection(connectionString))
-                {
-                    connection.Open();
-                    string query = "INSERT INTO Bettors (Username, Email, Balance, IsActive) VALUES (@Username, @Email, @Balance, @IsActive)";
-
-                    using (var command = new MySqlCommand(query, connection))
+                    using (var connection = new MySqlConnection(connectionString))
                     {
-                        command.Parameters.AddWithValue("@Username", newBettor.Username);
-                        command.Parameters.AddWithValue("@Email", newBettor.Email);
-                        command.Parameters.AddWithValue("@Balance", newBettor.Balance);
-                        command.Parameters.AddWithValue("@IsActive", newBettor.IsActive);
+                        connection.Open();
+                        string query = "INSERT INTO Bettors (Username, Password, Email, Balance, JoinDate, IsActive) VALUES (@Username, @Password, @Email, @Balance, @JoinDate, @IsActive)";
 
-                        command.ExecuteNonQuery();
+                        using (var command = new MySqlCommand(query, connection))
+                        {
+                            command.Parameters.AddWithValue("@Username", tbUsername.Text);
+                            command.Parameters.AddWithValue("@Email", tbEmail.Text);
+                            command.Parameters.AddWithValue("@Password", BCrypt.Net.BCrypt.HashPassword(tbPassword.Text));
+                            command.Parameters.AddWithValue("@Balance", int.Parse(tbBalance.Text));
+                            command.Parameters.AddWithValue("@JoinDate", DateTime.Now);
+                            command.Parameters.AddWithValue("@IsActive", 1);
+
+                            command.ExecuteNonQuery();
+                        }
                     }
-                }
 
-                LoadUsers(); // Refresh the DataGrid
+                    LoadUsers();
+                    ClearFields();
+                }
+                catch (Exception ex)
+                {
+                    ShowErrorMessage(ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                ShowErrorMessage(ex.Message);
+                ShowErrorMessage("Nem lehet mező üresen!");
+            }
+        }
+
+        private void btnModifyUser_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgUsers.SelectedItem is Bettors selectedBettor)
+            {
+                try
+                {
+                    using (var connection = new MySqlConnection(connectionString))
+                    {
+                        connection.Open();
+
+                        string query = "UPDATE Bettors SET Username = @Username, Email = @Email, Balance = @Balance, IsActive = @IsActive";
+
+                        if (!string.IsNullOrEmpty(tbPassword.Text))
+                        {
+                            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(tbPassword.Text);
+                            query += ", Password = @Password";
+                        }
+
+                        query += " WHERE BettorsID = @BettorsID";
+
+                        using (var command = new MySqlCommand(query, connection))
+                        {
+                            command.Parameters.AddWithValue("@Username", tbUsername.Text);
+                            command.Parameters.AddWithValue("@Email", tbEmail.Text);
+                            command.Parameters.AddWithValue("@Balance", int.Parse(tbBalance.Text));
+                            command.Parameters.AddWithValue("@IsActive", 1);
+                            command.Parameters.AddWithValue("@BettorsID", selectedBettor.BettorsId);
+
+                            if (!string.IsNullOrEmpty(tbPassword.Text))
+                            {
+                                string hashedPassword = BCrypt.Net.BCrypt.HashPassword(tbPassword.Text);
+                                command.Parameters.AddWithValue("@Password", hashedPassword);
+                            }
+
+                            command.ExecuteNonQuery();
+                        }
+                    }
+
+                    LoadUsers();
+                    ClearFields();
+                }
+                catch (Exception ex)
+                {
+                    ShowErrorMessage(ex.Message);
+                }
+            }
+            else
+            {
+                ShowErrorMessage("Válassz ki egy felhasználót a szerkesztéshez!");
             }
         }
 
@@ -213,7 +278,8 @@ namespace VegasHU
                         }
                     }
 
-                    LoadUsers(); // Refresh the DataGrid
+                    LoadUsers();
+                    ClearFields();
                 }
                 catch (Exception ex)
                 {
@@ -222,9 +288,18 @@ namespace VegasHU
             }
             else
             {
-                ShowErrorMessage("Please select a user to delete.");
+                ShowErrorMessage("Válassz ki egy felhasználót a törléshez!");
             }
         }
+
+        private void ClearFields()
+        {
+            tbUsername.Clear();
+            tbEmail.Clear();
+            tbPassword.Clear();
+            tbBalance.Clear();
+        }
+
         private void ShowErrorMessage(string message)
         {
             MessageBox.Show(message, "VegasHU System", MessageBoxButton.OK, MessageBoxImage.Error);
