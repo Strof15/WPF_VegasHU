@@ -320,7 +320,7 @@ namespace VegasHU
                                 BetDate = reader.GetDateTime("BetDate"),
                                 Odds = reader.GetFloat("Odds"),
                                 Amount = reader.GetInt32("Amount"),
-                                Status = reader.GetBoolean("Status"),
+                                Status = reader.GetInt32("Status"),
 
                                 Event = new Event
                                 {
@@ -338,12 +338,38 @@ namespace VegasHU
             }
             return betsList;
         }
+        private void CloseBets()
+        {
+            using (var connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = @"UPDATE Bets b
+                                JOIN Events e ON b.EventID = e.EventID
+                                SET b.Status = CASE 
+                                    WHEN e.EventDate < NOW() AND b.Status = 0 THEN
+                                        CASE WHEN RAND() < 0.5 THEN 1 ELSE 2 END
+                                    ELSE b.Status
+                                END
+                                WHERE e.EventDate < NOW() AND b.Status = 0";
+
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+
         private void LoadBets(int bettorId)
         {
+            CloseBets();
+
             List<Bets> bets = GetBetsForCurrentBettor(bettorId);
             UniformGrid betGrid = new UniformGrid
             {
-                Rows = bets.Count / 2,
+                
+                Columns = 2,
                 Background = new SolidColorBrush(Color.FromRgb(50, 50, 50))
             };
 
@@ -367,7 +393,7 @@ namespace VegasHU
                 });
                 eventInfoPanel.Children.Add(new Label
                 {
-                    Content = bet.BetDate.ToString("MM.dd"),
+                    Content = bet.Event.EventDate.ToString("MM.dd"),
                     Style = (Style)FindResource("SmallLabels"),
                     Margin = new Thickness(230, 0, 0, 0)
                 });
@@ -387,17 +413,34 @@ namespace VegasHU
                     HorizontalAlignment = HorizontalAlignment.Center
                 });
 
+                string statusText;
+                switch (bet.Status)
+                {
+                    case 0:
+                        statusText = "nyitott";
+                        break;
+                    case 1:
+                        statusText = "vesztett";
+                        break;
+                    case 2: 
+                        statusText = "nyert";
+                        break;
+                    default:
+                        statusText = "unknown";
+                        break;
+                }
+
                 stackPanel.Children.Add(new Label
                 {
-                    Content = bet.Status ? "Nyert" : "Vesztett",
+                    Content = statusText,
                     Style = (Style)FindResource("SmallLabels"),
-                    Foreground = bet.Status ? Brushes.Green : Brushes.Red,
+                    Foreground = bet.Status == 1 ? Brushes.Red : bet.Status == 2 ? Brushes.Green : Brushes.Gray,
                     HorizontalAlignment = HorizontalAlignment.Center
                 });
 
                 stackPanel.Children.Add(new Label
                 {
-                    Content = $"Nyeremény: {(bet.Status ? (bet.Odds * bet.Amount).ToString("N0") : "0")} ft",
+                    Content = $"Nyeremény: {(bet.Status == 2 ? (bet.Odds * bet.Amount).ToString("N0") : "0")} ft",
                     Style = (Style)FindResource("SmallLabels"),
                     HorizontalAlignment = HorizontalAlignment.Center
                 });
@@ -422,7 +465,7 @@ namespace VegasHU
                 });
                 oddsPanel.Children.Add(new Label
                 {
-                    Content = "Nem", 
+                    Content = "Nem",
                     FontSize = 8,
                     HorizontalAlignment = HorizontalAlignment.Center
                 });
@@ -435,6 +478,7 @@ namespace VegasHU
 
             BetsStackPanel.Children.Add(betGrid);
         }
+
 
         private void LoadUserData()
         {
@@ -649,6 +693,7 @@ namespace VegasHU
         private void NextMybet_Click(object sender, RoutedEventArgs e)
         {
             MyBetsPanelShow();
+            LoadBets(Session.CurrentBettor.BettorsId);
         }
 
         private void NextProfile_Click(object sender, RoutedEventArgs e)

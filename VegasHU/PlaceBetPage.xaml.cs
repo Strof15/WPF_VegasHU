@@ -124,7 +124,7 @@ namespace VegasHU
                     command.Parameters.AddWithValue("@amount", double.Parse(tbAmount.Text));
                     command.Parameters.AddWithValue("@bettorsid", Session.CurrentBettor.BettorsId);
                     command.Parameters.AddWithValue("@eventid", eventId);
-                    command.Parameters.AddWithValue("@status", true);
+                    command.Parameters.AddWithValue("@status", 0);
 
                     int rowsAffected = command.ExecuteNonQuery();
 
@@ -132,6 +132,7 @@ namespace VegasHU
                     {
                         UpdateBalance();
                         MessageBox.Show("A fogadás sikeres volt!", "VegasHU System", MessageBoxButton.OK, MessageBoxImage.Information);
+                        Close();
                     }
                     else
                     {

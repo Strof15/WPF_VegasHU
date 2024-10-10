@@ -14,7 +14,7 @@ namespace VegasHU.Models
         public int Amount { get; set; }
         public int BettorsID { get; set; }
         public int EventID { get; set; }
-        public bool Status { get; set; }
+        public int Status { get; set; }
 
         public Bettors Bettor { get; set; }
         public Event Event { get; set; }
