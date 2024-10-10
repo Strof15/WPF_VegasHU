@@ -443,6 +443,7 @@ namespace VegasHU
             BetPanel.Visibility = Visibility.Collapsed;
             MyBetsPanel.Visibility = Visibility.Collapsed;
             ProfilePanel.Visibility = Visibility.Collapsed;
+            NavPanel.Visibility = Visibility.Collapsed;
         }
 
         private void btnBetPanel_Click(object sender, RoutedEventArgs e)
@@ -455,6 +456,7 @@ namespace VegasHU
             BetPanel.Visibility = Visibility.Visible;
             MyBetsPanel.Visibility = Visibility.Collapsed;
             ProfilePanel.Visibility = Visibility.Collapsed;
+            NavPanel.Visibility = Visibility.Visible;
         }
         private void btnMyBetsPanel_Click(object sender, RoutedEventArgs e)
         {
@@ -467,6 +469,7 @@ namespace VegasHU
             BetPanel.Visibility = Visibility.Collapsed;
             MyBetsPanel.Visibility = Visibility.Visible;
             ProfilePanel.Visibility = Visibility.Collapsed;
+            NavPanel.Visibility = Visibility.Visible;
         }
 
         private void btnProfilePanel_Click(object sender, RoutedEventArgs e)
@@ -480,6 +483,7 @@ namespace VegasHU
             BetPanel.Visibility = Visibility.Collapsed;
             MyBetsPanel.Visibility = Visibility.Collapsed;
             ProfilePanel.Visibility = Visibility.Visible;
+            NavPanel.Visibility = Visibility.Visible;
         }
 
         private void StatusComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -495,6 +499,19 @@ namespace VegasHU
             }
         }
 
+        private void NextBet_Click(object sender, RoutedEventArgs e)
+        {
+            BetPanelShow();
+        }
 
+        private void NextMybet_Click(object sender, RoutedEventArgs e)
+        {
+            MyBetsPanelShow();
+        }
+
+        private void NextProfile_Click(object sender, RoutedEventArgs e)
+        {
+            ProfilePanelShow();
+        }
     }
 }

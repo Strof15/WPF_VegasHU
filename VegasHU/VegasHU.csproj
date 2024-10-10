@@ -19,11 +19,16 @@
     <None Remove="Images\003-hockey-sticks.png" />
     <None Remove="Images\003-list.png" />
     <None Remove="Images\003-support.png" />
+    <None Remove="Images\arrow-right.png" />
     <None Remove="Images\coins.png" />
     <None Remove="Images\exit.png" />
     <None Remove="Images\group.png" />
+    <None Remove="Images\poker-chip128.png" />
+    <None Remove="Images\right.png" />
     <None Remove="Images\ticket.png" />
+    <None Remove="Images\ticket128.png" />
     <None Remove="Images\user.png" />
+    <None Remove="Images\user128.png" />
     <None Remove="Images\vegashu-img.png" />
   </ItemGroup>
 
@@ -55,6 +60,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\003-support.png" />
+    <Resource Include="Images\arrow-right.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\coins.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -62,10 +70,19 @@
     <Resource Include="Images\group.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\poker-chip128.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\ticket.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\ticket128.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\user.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\user128.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\vegashu-img.png">
