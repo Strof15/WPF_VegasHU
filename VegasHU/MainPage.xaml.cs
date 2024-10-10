@@ -85,7 +85,7 @@ namespace VegasHU
                 };
                 oddsButton.Click += (s, e) =>
                 {
-                    var placeBetPage = new PlaceBetPage(
+                    var placeBetPage = new PlaceBetPage(this,
                         bettingEvent.EventName,
                         odds,
                         result,
@@ -241,6 +241,7 @@ namespace VegasHU
                 oddsButton.Click += (s, e) =>
                 {
                     var placeBetPage = new PlaceBetPage(
+                        this,
                         bettingEvent.EventName,
                         odds,
                         result,
@@ -394,7 +395,7 @@ namespace VegasHU
             {
                 connection.Open();
 
-                string query = "SELECT Balance, Email FROM Bettors WHERE BettorsID = @bettorsid"; // Email lekérdezés is
+                string query = "SELECT Balance FROM Bettors WHERE BettorsID = @bettorsid";
 
                 using (var command = new MySqlCommand(query, connection))
                 {
@@ -405,7 +406,6 @@ namespace VegasHU
                         if (reader.Read())
                         {
                             Session.CurrentBettor.Balance = reader.GetInt32("Balance");
-                            Session.CurrentBettor.Email = reader.GetString("Email"); // E-mail cím tárolása
                             lblBalance.Text = $"Egyenleg: {Session.CurrentBettor.Balance} ft";
                         }
                     }

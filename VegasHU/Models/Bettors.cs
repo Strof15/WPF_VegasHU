@@ -14,7 +14,7 @@ namespace VegasHU.Models
         public int Balance { get; set; }
         public string Email { get; set; }
         public DateTime JoinDate { get; set; }
-        public bool IsActive { get; set; }
+        public int IsActive { get; set; }
 
         public ICollection<Bets> Bets { get; set; }
     }
