@@ -250,6 +250,7 @@ namespace VegasHU
                         bettingEvent.EventID
                     );
                     placeBetPage.ShowDialog();
+
                 };
 
                 oddsButtonStack.Children.Add(oddsLabel);
@@ -264,7 +265,6 @@ namespace VegasHU
                 eventCardBorder.Child = eventCardStack;
             }
         }
-
         private List<Event> GetEventsFromDatabase()
         {
             var events = new List<Event>();
@@ -349,24 +349,51 @@ namespace VegasHU
                                 SET b.Status = CASE 
                                     WHEN e.EventDate < NOW() AND b.Status = 0 THEN
                                         CASE WHEN RAND() < 0.5 THEN 1 ELSE 2 END
+                                    WHEN e.EventDate < NOW() AND b.Status = 2 THEN 3 -- mark as paid out
                                     ELSE b.Status
                                 END
-                                WHERE e.EventDate < NOW() AND b.Status = 0;
-";
+                                WHERE e.EventDate < NOW() AND b.Status IN (0, 2);";
 
                 using (var command = new MySqlCommand(query, connection))
                 {
-                    command.ExecuteNonQuery();
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        string payoutQuery = @"SELECT SUM(b.Odds * b.Amount) AS TotalWinnings
+                                                FROM Bets b
+                                                WHERE b.BettorsID = @bettorsID AND b.Status = 2;";
+
+                        using (var payoutCommand = new MySqlCommand(payoutQuery, connection))
+                        {
+                            payoutCommand.Parameters.AddWithValue("@bettorsID", Session.CurrentBettor.BettorsId);
+
+                            object result = payoutCommand.ExecuteScalar();
+                            if (result != null && result != DBNull.Value)
+                            {
+                                int totalWinnings = Convert.ToInt32(result);
+
+                                string updateBalanceQuery = "UPDATE Bettors SET Balance = Balance + @amount WHERE BettorsID = @bettorsid";
+                                using (var updateBalanceCommand = new MySqlCommand(updateBalanceQuery, connection))
+                                {
+                                    updateBalanceCommand.Parameters.AddWithValue("@amount", totalWinnings);
+                                    updateBalanceCommand.Parameters.AddWithValue("@bettorsid", Session.CurrentBettor.BettorsId);
+                                    updateBalanceCommand.ExecuteNonQuery();
+
+                                    Session.CurrentBettor.Balance += totalWinnings;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
 
-
         private void LoadBets(int bettorId)
         {
             BetsStackPanel.Children.Clear();
-
             CloseBets();
+            RefreshBalance();
             List<Bets> bets = GetBetsForCurrentBettor(bettorId);
             UniformGrid betGrid = new UniformGrid
             {
@@ -423,13 +450,13 @@ namespace VegasHU
                 {
                     Content = statusText,
                     Style = (Style)FindResource("SmallLabels"),
-                    Foreground = bet.Status == 1 ? Brushes.Red : bet.Status == 2 ? Brushes.Green : Brushes.Gray,
+                    Foreground = bet.Status == 1 ? Brushes.Red : bet.Status == 2 || bet.Status == 3 ? Brushes.Green : Brushes.Gray,
                     HorizontalAlignment = HorizontalAlignment.Center
                 });
 
                 stackPanel.Children.Add(new Label
                 {
-                    Content = $"Nyeremény: {(bet.Status == 2 ? (bet.Odds * bet.Amount).ToString("N0") : "0")} ft",
+                    Content = $"Nyeremény: {(bet.Status == 2 || bet.Status == 3 ? (bet.Odds * bet.Amount).ToString("N0") : "0")} ft",
                     Style = (Style)FindResource("SmallLabels"),
                     HorizontalAlignment = HorizontalAlignment.Center
                 });
@@ -467,7 +494,6 @@ namespace VegasHU
 
             BetsStackPanel.Children.Add(betGrid);
         }
-
 
         private void LoadUserData()
         {
