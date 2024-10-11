@@ -363,6 +363,7 @@ namespace VegasHU
 
         private void LoadBets(int bettorId)
         {
+            BetsStackPanel.Children.Clear();
             CloseBets();
 
             List<Bets> bets = GetBetsForCurrentBettor(bettorId);
@@ -412,23 +413,10 @@ namespace VegasHU
                     Style = (Style)FindResource("SmallLabels"),
                     HorizontalAlignment = HorizontalAlignment.Center
                 });
-
                 string statusText;
-                switch (bet.Status)
-                {
-                    case 0:
-                        statusText = "nyitott";
-                        break;
-                    case 1:
-                        statusText = "vesztett";
-                        break;
-                    case 2: 
-                        statusText = "nyert";
-                        break;
-                    default:
-                        statusText = "unknown";
-                        break;
-                }
+                if (bet.Status == 0) statusText = "nyitott";
+                else if (bet.Status == 1) statusText = "vesztett";
+                else statusText = "nyert";
 
                 stackPanel.Children.Add(new Label
                 {
@@ -640,6 +628,7 @@ namespace VegasHU
         }
         private void BetPanelShow()
         {
+          
             HomePanel.Visibility = Visibility.Collapsed;
             BetPanel.Visibility = Visibility.Visible;
             MyBetsPanel.Visibility = Visibility.Collapsed;
@@ -692,8 +681,9 @@ namespace VegasHU
 
         private void NextMybet_Click(object sender, RoutedEventArgs e)
         {
-            MyBetsPanelShow();
+           
             LoadBets(Session.CurrentBettor.BettorsId);
+            MyBetsPanelShow();
         }
 
         private void NextProfile_Click(object sender, RoutedEventArgs e)

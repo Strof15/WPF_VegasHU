@@ -131,6 +131,7 @@ namespace VegasHU
                     if (rowsAffected > 0)
                     {
                         UpdateBalance();
+                        
                         MessageBox.Show("A fogadás sikeres volt!", "VegasHU System", MessageBoxButton.OK, MessageBoxImage.Information);
                         Close();
                     }
