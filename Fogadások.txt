@@ -7,7 +7,7 @@ CREATE TABLE Bets (
   Amount INT NOT NULL,                     
   BettorsID INT NOT NULL,                  
   EventID INT NOT NULL,                    
-  Status BOOLEAN NOT NULL,             
+  Status INT NOT NULL,             
   FOREIGN KEY (BettorsID) REFERENCES Bettors(BettorsID),
   FOREIGN KEY (EventID) REFERENCES Events(EventID)
 );
