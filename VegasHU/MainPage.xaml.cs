@@ -351,7 +351,8 @@ namespace VegasHU
                                         CASE WHEN RAND() < 0.5 THEN 1 ELSE 2 END
                                     ELSE b.Status
                                 END
-                                WHERE e.EventDate < NOW() AND b.Status = 0";
+                                WHERE e.EventDate < NOW() AND b.Status = 0;
+";
 
                 using (var command = new MySqlCommand(query, connection))
                 {
@@ -364,8 +365,8 @@ namespace VegasHU
         private void LoadBets(int bettorId)
         {
             BetsStackPanel.Children.Clear();
-            CloseBets();
 
+            CloseBets();
             List<Bets> bets = GetBetsForCurrentBettor(bettorId);
             UniformGrid betGrid = new UniformGrid
             {
