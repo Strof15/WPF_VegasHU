@@ -381,6 +381,8 @@ namespace VegasHU
                                     updateBalanceCommand.ExecuteNonQuery();
 
                                     Session.CurrentBettor.Balance += totalWinnings;
+
+                                    RefreshBalance();
                                 }
                             }
                         }

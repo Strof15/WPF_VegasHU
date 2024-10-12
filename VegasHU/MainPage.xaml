@@ -89,19 +89,19 @@
                                 </StackPanel>
                             </Border>
                             <Border Height="250"  Style="{DynamicResource ColoredStackPanelBorder}" VerticalAlignment="Top" CornerRadius="20">
-    <StackPanel Style="{DynamicResource ColoredStackPanel}">
-        <StackPanel Orientation="Vertical" Margin="10 50 10 0">
-            <Image Source="Images/ticket128.png" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
-            <Label Style="{DynamicResource MediumLabels}" VerticalAlignment="Center" HorizontalAlignment="Center"  Content="Fogadásaim!" Margin="0"/>
-        </StackPanel>
-        <Button Width="200" x:Name="NextMybet" Click="NextMybet_Click">
-            <StackPanel Orientation="Horizontal">
-                <Label Style="{DynamicResource SmallLabels}" VerticalAlignment="Center" HorizontalAlignment="Center"  Content="Tovább" Margin="0 3 0 0"/>
-                <Image Source="Images/arrow-right.png" Width="28" Height="24"/>
-            </StackPanel>
-        </Button>
-    </StackPanel>
-</Border>
+                                <StackPanel Style="{DynamicResource ColoredStackPanel}">
+                                    <StackPanel Orientation="Vertical" Margin="10 50 10 0">
+                                        <Image Source="Images/ticket128.png" Width="60" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                                        <Label Style="{DynamicResource MediumLabels}" VerticalAlignment="Center" HorizontalAlignment="Center"  Content="Fogadásaim!" Margin="0"/>
+                                    </StackPanel>
+                                    <Button Width="200" x:Name="NextMybet" Click="NextMybet_Click">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Style="{DynamicResource SmallLabels}" VerticalAlignment="Center" HorizontalAlignment="Center"  Content="Tovább" Margin="0 3 0 0"/>
+                                            <Image Source="Images/arrow-right.png" Width="28" Height="24"/>
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+                            </Border>
                             <Border Height="250"  Style="{DynamicResource ColoredStackPanelBorder}" VerticalAlignment="Top" CornerRadius="20">
                                 <StackPanel Style="{DynamicResource ColoredStackPanel}">
                                     <StackPanel Orientation="Vertical" Margin="10 50 10 0">
