@@ -223,13 +223,6 @@
                         <!-- Header and ComboBox -->
                         <StackPanel Grid.Row="0" Margin="20">
                             <TextBlock Text="Fogadások" FontSize="32" VerticalAlignment="Top" Foreground="White" />
-                            <ComboBox x:Name="statusComboBox" VerticalAlignment="Top" Margin="0,10,0,0" 
-                                  HorizontalAlignment="Left" Width="200" 
-                                  SelectionChanged="StatusComboBox_SelectionChanged">
-                                <ComboBoxItem Content="Vesztett" Foreground="Red" />
-                                <ComboBoxItem Content="Nyert" Foreground="Green" />
-                                <ComboBoxItem Content="Nyitott" Foreground="#784599" />
-                            </ComboBox>
                         </StackPanel>
 
                         <!-- Bets Section -->

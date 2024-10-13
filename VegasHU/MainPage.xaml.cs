@@ -272,7 +272,7 @@ namespace VegasHU
             using (var connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
-                string query = "SELECT EventID,EventName, EventDate, Category, Location FROM Events";
+                string query = "SELECT EventID, EventName, EventDate, Category, Location FROM Events WHERE EventDate >= NOW()";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     using (var reader = command.ExecuteReader())
@@ -349,7 +349,7 @@ namespace VegasHU
                                 SET b.Status = CASE 
                                     WHEN e.EventDate < NOW() AND b.Status = 0 THEN
                                         CASE WHEN RAND() < 0.5 THEN 1 ELSE 2 END
-                                    WHEN e.EventDate < NOW() AND b.Status = 2 THEN 3 -- mark as paid out
+                                    WHEN e.EventDate < NOW() AND b.Status = 2 THEN 3
                                     ELSE b.Status
                                 END
                                 WHERE e.EventDate < NOW() AND b.Status IN (0, 2);";
@@ -691,16 +691,6 @@ namespace VegasHU
             MyBetsPanel.Visibility = Visibility.Collapsed;
             ProfilePanel.Visibility = Visibility.Visible;
             NavPanel.Visibility = Visibility.Visible;
-        }
-
-        private void StatusComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (statusComboBox.SelectedItem is ComboBoxItem selectedItem)
-            {
-                var selectedColor = (selectedItem.Foreground as SolidColorBrush)?.Color ?? Colors.Black;
-
-                statusComboBox.Foreground = new SolidColorBrush(selectedColor);
-            }
         }
 
         private void NextBet_Click(object sender, RoutedEventArgs e)
