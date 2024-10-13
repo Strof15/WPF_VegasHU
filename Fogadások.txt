@@ -1,17 +1,5 @@
 CREATE DATABASE VegasHU CHARACTER SET utf8 COLLATE utf8_hungarian_ci;
 
-CREATE TABLE Bets (
-  BetsID INT AUTO_INCREMENT PRIMARY KEY,   
-  BetDate DATE NOT NULL,                   
-  Odds FLOAT NOT NULL,                     
-  Amount INT NOT NULL,                     
-  BettorsID INT NOT NULL,                  
-  EventID INT NOT NULL,                    
-  Status INT NOT NULL,             
-  FOREIGN KEY (BettorsID) REFERENCES Bettors(BettorsID),
-  FOREIGN KEY (EventID) REFERENCES Events(EventID)
-);
-
 CREATE TABLE Bettors (
   BettorsID INT AUTO_INCREMENT PRIMARY KEY,  
   Username VARCHAR(50) NOT NULL,
@@ -30,13 +18,24 @@ CREATE TABLE Events (
   Location VARCHAR(100) NOT NULL             
 );
 
-EventCreator: Strof;Asd123
-Admin: Admin;Admin123
+CREATE TABLE Bets (
+  BetsID INT AUTO_INCREMENT PRIMARY KEY,   
+  BetDate DATE NOT NULL,                   
+  Odds FLOAT NOT NULL,                     
+  Amount INT NOT NULL,                     
+  BettorsID INT NOT NULL,                  
+  EventID INT NOT NULL,                    
+  Status INT NOT NULL,             
+  FOREIGN KEY (BettorsID) REFERENCES Bettors(BettorsID),
+  FOREIGN KEY (EventID) REFERENCES Events(EventID)
+);
 
 INSERT INTO Bettors (Username, Password, Balance, Email, JoinDate, IsActive)
 VALUES 
-('strof', '$2a$11$bQK2PmgoNxFMqFQ4oLlRZ.rcg.HL8g3oIin3L.alDYGOK6XaF7jxq', 0, 'strof@gmail.com', '0000-00-00', 1),
-('admin', '$2a$11$dC4rTPSNpOCPEgE3dZbhB.Q6fYR2g/38au6SKxpKzreB3/KfMb1D2', 0, 'admin@admin.com', '0000-00-00', 1);
+('strof', '$2a$11$bQK2PmgoNxFMqFQ4oLlRZ.rcg.HL8g3oIin3L.alDYGOK6XaF7jxq', 0, 'strof@vegashu.com', '2024-10-07', 1),
+('admin', '$2a$11$dC4rTPSNpOCPEgE3dZbhB.Q6fYR2g/38au6SKxpKzreB3/KfMb1D2', 0, 'admin@vegashu.com', '2024-10-07', 1),
+('laci', '$2a$11$CxEz8LkiTenNJq6VNqqZ7.0PW.UlrdDEwDRoKHGqMs3...', 141160, 'laci@gmail.com', '2024-10-07', 1);
+
 
 INSERT INTO Events (EventName, EventDate, Category, Location)
 VALUES
@@ -56,28 +55,32 @@ VALUES
 ('Lakers megnyeri a nyugati konferenciát?', '2025-04-15', 'Kosárlabda', 'Los Angeles, USA'),
 ('Összes gól 3.5 fölött?', '2025-04-10', 'Jégkorong', 'New York, USA'),
 ('Van Gerwen megnyeri a Players Championshipet?', '2025-04-20', 'Darts', 'Milton Keynes, UK'),
-('Békéscsaba megnyeri az NB I-et?', '2025-05-05', 'Röplabda', 'Békéscsaba, Hungary');
+('Békéscsaba megnyeri az NB I-et?', '2025-05-05', 'Röplabda', 'Békéscsaba, Hungary'),
+('FC Barcelona nyeri a meccset?', '2025-05-12', 'Labdarugás', 'Barcelona, Spain');
+
+INSERT INTO Bets (BetDate, Odds, Amount, BettorsID, EventID, Status)
+VALUES
+('2024-10-12', 3.4, 1000, 2, 16, 3),
+('2024-10-12', 3.4, 1000, 2, 16, 1),
+('2024-10-12', 3.4, 1000, 2, 16, 1),
+('2024-10-13', 3.4, 41000, 2, 1, 0),
+('2024-10-13', 2.29, 10016, 2, 6, 0);
 
 Szerepkörök és jogosultságok tervezete:
 
-User: Bettor
+Fogadó (felhasz: laci; jelszó: Asd123):
 
 Regisztrálhat, fogadásokat tehet, egyenlegét kezelheti.
 Megtekintheti saját fogadásait és azok státuszát.
 
-
 Nem fér hozzá adminisztrációs funkciókhoz (pl. új események létrehozása, felhasználók kezelése).
 
-Moderator: Organizer
+Szervező (felhasz: Strof; jelszó: Asd123):
 
-Minden jogot megkap, amit a User szerepkör is, de ezen felül:
-Láthatja más felhasználók fogadásait.
-Adminisztrálhatja a felhasználókat (pl. letilthatja őket, vagy aktiválhatja a fiókjukat).
-Felülvizsgálhatja és módosíthatja a fogadások státuszát.
-Új eseményeket hozhat létre vagy törölhet.
-Módosíthatja az események adatait (pl. időpont, helyszín).
+Új eseményeket hozhat létre.
+Megtekintheti a meglévő eseményeket.
 
-Admin:
+Admin (felhasz: admin; jelszó: Admin123):
 
-Teljes hozzáférése van az összes felhasználó adatához, beleértve azok egyenlegét, státuszát, és jelszavait (hash-elve).
-Új felhasználó, meglévő törlése, jelszó alaphelyzetbe hozása, 
+Teljes hozzáférése van az összes felhasználó adatához, beleértve azok egyenlegét, státuszát és módosíthatja jelszavát is..
+Új felhasználó hozzáadása, meglévő törlése, esemény hozzáadása, listázása.
